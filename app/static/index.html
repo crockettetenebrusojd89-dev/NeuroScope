@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NeuroScope — Interactive Deep Learning Visualization Lab</title>
+<link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<div id="layout">
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">N</div>
+      <div>
+        <div class="brand-name">NeuroScope</div>
+        <div class="brand-sub">DL visualization lab</div>
+      </div>
+    </div>
+    <nav id="nav">
+      <div class="nav-group">Fundamentals</div>
+      <a data-page="tensor" class="nav-item">Tensor &amp; Shape Lab</a>
+      <a data-page="activations" class="nav-item">Activations Lab</a>
+      <a data-page="losses" class="nav-item">Loss Lab</a>
+      <a data-page="graph" class="nav-item">Computational Graph</a>
+      <div class="nav-group">Networks</div>
+      <a data-page="playground" class="nav-item">Network Playground</a>
+      <a data-page="backprop" class="nav-item">Backprop Visualizer</a>
+      <a data-page="diagnostics" class="nav-item">Gradient Diagnostics</a>
+      <div class="nav-group">Training</div>
+      <a data-page="optimizers" class="nav-item">Optimization Lab</a>
+      <a data-page="init" class="nav-item">Initialization Lab</a>
+      <a data-page="lr" class="nav-item">Learning Rate Lab</a>
+      <a data-page="regularization" class="nav-item">Regularization Lab</a>
+      <div class="nav-group">Convolution</div>
+      <a data-page="cnn" class="nav-item">Convolution Lab</a>
+      <a data-page="pooling" class="nav-item">Pooling Lab</a>
+    </nav>
+    <div class="sidebar-footer">v0.1.0 · NumPy engine</div>
+  </aside>
+  <main id="main">
+    <header id="topbar">
+      <h1 id="page-title">Tensor &amp; Shape Lab</h1>
+      <p id="page-desc"></p>
+    </header>
+    <section id="page-content"></section>
+  </main>
+</div>
+<script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
