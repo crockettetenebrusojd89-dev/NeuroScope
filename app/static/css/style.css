@@ -14,7 +14,8 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Segoe UI", -apple-system, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
   background: var(--bg); color: var(--text); font-size: 14px;
 }
 #layout { display: flex; min-height: 100vh; }
@@ -107,3 +108,30 @@ canvas.plot { width: 100%; background: var(--bg-raised); border-radius: 8px; dis
 .pill.ok { background: rgba(63,185,111,.15); color: var(--green); }
 .pill.vanishing { background: rgba(247,162,79,.15); color: var(--accent-2); }
 .pill.exploding { background: rgba(229,83,75,.15); color: var(--red); }
+
+/* ---------------- i18n ---------------- */
+.lang-switch { display: flex; gap: 6px; padding: 0 8px; }
+.lang-switch button {
+  flex: 1; padding: 5px 0; font-size: 12px; font-weight: 500;
+  background: var(--bg-raised); border: 1px solid var(--border);
+  color: var(--text-dim); border-radius: 7px; white-space: nowrap;
+}
+.lang-switch button.active {
+  background: rgba(79,143,247,.16); color: var(--accent);
+  border-color: rgba(79,143,247,.45); font-weight: 650;
+}
+#page-title .title-en {
+  display: block; font-size: 14px; font-weight: 500;
+  color: var(--text-dim); margin-top: 4px;
+}
+
+/* ---------------- responsive ---------------- */
+@media (max-width: 860px) {
+  #layout { flex-direction: column; }
+  #sidebar {
+    width: 100%; height: auto; position: static;
+    border-right: none; border-bottom: 1px solid var(--border);
+  }
+  #main { padding: 16px; }
+  .lang-switch { max-width: 320px; }
+}

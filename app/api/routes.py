@@ -59,7 +59,15 @@ def tensor_op(payload: dict = Body(...)):
     params = payload.get("params", {})
     if values is None:
         raise HTTPException(400, "missing 'values'")
-    out, explanation = _err(tensor_ops.apply_operation, op, values, params)
+    try:
+        out, explanation = tensor_ops.apply_operation(op, values, params)
+    except tensor_ops.TensorOpError as exc:
+        # structured detail: the client localizes it via its i18n resources
+        raise HTTPException(
+            400, detail={"i18n": exc.key, "params": exc.params}
+        ) from exc
+    except (ValueError, TypeError) as exc:
+        raise HTTPException(400, detail=str(exc)) from exc
     return _clean(
         {
             "input_shape": list(np.asarray(values, dtype=float).shape),
@@ -446,7 +454,7 @@ def cnn_pool(payload: dict = Body(default={})):
     img = payload.get("image")
     image = np.array(img, dtype=float) if img else sample_image(8)
     size = int(payload.get("size", 2))
-    stride = int(payload.get("stride", size))
+    stride = int(payload.get("stride") or size)  # stride may be null → default to size
     mode = payload.get("mode", "max")
     if mode not in ("max", "avg"):
         raise HTTPException(400, "mode must be 'max' or 'avg'")

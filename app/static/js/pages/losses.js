@@ -1,36 +1,35 @@
 import { api } from '../api.js';
 import { lineChart } from '../plot.js';
+import { t } from '../i18n.js';
 
 export async function render(root) {
   root.innerHTML = `
     <div class="panel">
       <div class="controls">
-        <div class="field"><label>Loss</label>
-          <select id="l-name"><option value="mse">MSE</option>
-            <option value="bce">Binary Cross Entropy</option>
-            <option value="cross_entropy">Cross Entropy (3-class)</option></select></div>
-        <div class="field"><label>Prediction p = <span id="l-pv">0.70</span></label>
+        <div class="field"><label>${t('losses.loss')}</label>
+          <select id="l-name">
+            <option value="mse">${t('losses.options.mse')}</option>
+            <option value="bce">${t('losses.options.bce')}</option>
+            <option value="cross_entropy">${t('losses.options.cross_entropy')}</option>
+          </select></div>
+        <div class="field"><label>${t('losses.prediction')}<span id="l-pv">0.70</span></label>
           <input type="range" id="l-p" min="0.01" max="0.99" step="0.01" value="0.7" style="width:240px"/></div>
-        <div class="field"><label>Target y</label>
-          <select id="l-t"><option value="1">1 (positive)</option><option value="0">0 (negative)</option></select></div>
-        <div class="field"><span class="metric-label">loss</span><span class="metric" id="l-loss">–</span></div>
-        <div class="field"><span class="metric-label">∂loss/∂p</span><span class="metric" id="l-grad">–</span></div>
+        <div class="field"><label>${t('losses.target')}</label>
+          <select id="l-t"><option value="1">${t('losses.targetPos')}</option>
+            <option value="0">${t('losses.targetNeg')}</option></select></div>
+        <div class="field"><span class="metric-label">${t('losses.lossValue')}</span><span class="metric" id="l-loss">–</span></div>
+        <div class="field"><span class="metric-label">${t('losses.gradValue')}</span><span class="metric" id="l-grad">–</span></div>
       </div>
       <p class="hint" style="margin-top:8px" id="l-note"></p>
     </div>
-    <div class="panel"><h3>Loss as a function of the prediction</h3>
+    <div class="panel"><h3>${t('losses.chartTitle')}</h3>
       <canvas id="l-canvas" class="plot"></canvas></div>`;
 
   const $ = id => root.querySelector(id);
-  const NOTES = {
-    mse: 'MSE = mean((p − y)²). Gradient grows linearly with the error.',
-    bce: 'BCE = −[y·log p + (1−y)·log(1−p)]. Confident wrong predictions are punished harshly.',
-    cross_entropy: '3-class CE with logits [4p−2, 0, 0], true class 0. The x-axis acts as the model\'s confidence.',
-  };
 
   async function update() {
     const name = $('#l-name').value;
-    $('#l-note').textContent = NOTES[name];
+    $('#l-note').textContent = t(`losses.notes.${name}`);
     const prediction = parseFloat($('#l-p').value);
     $('#l-pv').textContent = prediction.toFixed(2);
     const r = await api('/losses/eval', {

@@ -1,27 +1,28 @@
 import { api } from '../api.js';
+import { t } from '../i18n.js';
 
 // Interactive computational graph: step forward, then backward.
 export async function render(root) {
   root.innerHTML = `
     <div class="panel">
       <div class="controls">
-        <button id="g-fwd">▶ Step forward</button>
-        <button id="g-bwd" disabled>◀ Step backward</button>
-        <button id="g-auto" class="secondary">Auto-play</button>
-        <button id="g-reset" class="secondary">Reset</button>
+        <button id="g-fwd">${t('graph.stepFwd')}</button>
+        <button id="g-bwd" disabled>${t('graph.stepBwd')}</button>
+        <button id="g-auto" class="secondary">${t('graph.autoPlay')}</button>
+        <button id="g-reset" class="secondary">${t('common.reset')}</button>
         <span class="hint" id="g-status"></span>
       </div>
     </div>
-    <div class="panel"><h3>Graph — two-layer neuron with MSE loss</h3>
+    <div class="panel"><h3>${t('graph.panelTitle')}</h3>
       <canvas id="g-canvas" class="plot" style="height:420px"></canvas>
-      <p class="hint" style="margin-top:8px" id="g-detail">Each edge shows the local gradient ∂parent/∂child. Backward steps multiply local gradients along the path — that is the chain rule.</p>
+      <p class="hint" style="margin-top:8px" id="g-detail">${t('graph.initialHint')}</p>
     </div>`;
 
   const $ = id => root.querySelector(id);
   const canvas = $('#g-canvas');
   const data = await api('/graph/run', {});
   const pos = layout(data.nodes.map(n => n.name));
-  const done = new Set();          // nodes with computed value (forward) / grad (backward)
+  const done = new Set();
   const gradDone = new Set();
   let fwdQueue = [...data.forward_steps];
   let bwdQueue = [...data.backward_steps];
@@ -68,24 +69,23 @@ export async function render(root) {
   function status(msg) { $('#g-status').textContent = msg; }
 
   function stepForward() {
-    if (!fwdQueue.length) { status('Forward pass complete — loss computed. Now step backward.'); $('#g-bwd').disabled = false; return; }
+    if (!fwdQueue.length) { status(t('graph.fwdDone')); $('#g-bwd').disabled = false; return; }
     const name = fwdQueue.shift();
     done.add(name);
     const n = nodeByName[name];
-    $('#g-detail').textContent = `Forward: computed ${name} = ${n.value.toFixed(5)}`;
-    status(`forward ${data.forward_steps.length - fwdQueue.length}/${data.forward_steps.length}`);
+    $('#g-detail').textContent = t('graph.fwdStep', { name, value: n.value.toFixed(5) });
+    status(t('graph.fwdProgress', { done: data.forward_steps.length - fwdQueue.length, total: data.forward_steps.length }));
     if (!fwdQueue.length) { $('#g-bwd').disabled = false; }
     draw();
   }
 
   function stepBackward() {
-    if (!bwdQueue.length) { status('Backward pass complete — every input has its gradient.'); return; }
+    if (!bwdQueue.length) { status(t('graph.bwdDone')); return; }
     const name = bwdQueue.shift();
     gradDone.add(name);
     const n = nodeByName[name];
-    $('#g-detail').textContent =
-      `Backward: ∂L/∂${name} = ${n.grad.toFixed(5)} (sum of downstream gradient × local gradient on each edge)`;
-    status(`backward ${data.backward_steps.length - bwdQueue.length}/${data.backward_steps.length}`);
+    $('#g-detail').textContent = t('graph.bwdStep', { name, value: n.grad.toFixed(5) });
+    status(t('graph.bwdProgress', { done: data.backward_steps.length - bwdQueue.length, total: data.backward_steps.length }));
     draw();
   }
 
@@ -95,7 +95,7 @@ export async function render(root) {
     bwdQueue = [...data.backward_steps];
     $('#g-bwd').disabled = true;
     status('');
-    $('#g-detail').textContent = 'Each edge shows the local gradient ∂parent/∂child.';
+    $('#g-detail').textContent = t('graph.initialHint');
     draw();
   }
 

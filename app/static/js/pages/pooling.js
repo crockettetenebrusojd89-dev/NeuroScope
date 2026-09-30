@@ -1,29 +1,30 @@
 import { api } from '../api.js';
 import { heatmap } from '../plot.js';
+import { t, errText } from '../i18n.js';
 
 // Pooling Lab with sliding-window animation.
 export async function render(root) {
   root.innerHTML = `
     <div class="panel">
       <div class="controls">
-        <div class="field"><label>Mode</label>
+        <div class="field"><label>${t('pooling.mode')}</label>
           <select id="pl-mode"><option>max</option><option>avg</option></select></div>
-        <div class="field"><label>Window size</label>
+        <div class="field"><label>${t('pooling.windowSize')}</label>
           <select id="pl-size"><option>2</option><option>3</option><option>4</option></select></div>
-        <div class="field"><label>Stride</label>
-          <select id="pl-stride"><option value="">= size</option><option>1</option><option>2</option><option>3</option></select></div>
-        <button id="pl-run">Compute</button>
-        <button id="pl-play" class="secondary">▶ Animate window</button>
-        <div class="field"><span class="metric-label">output shape</span>
+        <div class="field"><label>${t('pooling.stride')}</label>
+          <select id="pl-stride"><option value="">${t('pooling.strideAuto')}</option><option>1</option><option>2</option><option>3</option></select></div>
+        <button id="pl-run">${t('common.compute')}</button>
+        <button id="pl-play" class="secondary">${t('common.animate')}</button>
+        <div class="field"><span class="metric-label">${t('common.outputShape')}</span>
           <span class="metric" id="pl-shape">–</span></div>
       </div>
       <div id="pl-error"></div>
     </div>
     <div class="grid-2">
-      <div class="panel"><h3>Input feature map</h3><canvas id="pl-in" class="plot"></canvas></div>
-      <div class="panel"><h3>Pooled output</h3><canvas id="pl-out" class="plot"></canvas></div>
+      <div class="panel"><h3>${t('pooling.inputMap')}</h3><canvas id="pl-in" class="plot"></canvas></div>
+      <div class="panel"><h3>${t('pooling.outputMap')}</h3><canvas id="pl-out" class="plot"></canvas></div>
     </div>
-    <div class="panel"><h3>Current window</h3><p class="hint" id="pl-detail">Press “Animate window”.</p></div>`;
+    <div class="panel"><h3>${t('pooling.detailTitle')}</h3><p class="hint" id="pl-detail">${t('common.pressAnimate')}</p></div>`;
 
   const $ = id => root.querySelector(id);
   let data = null, timer = null, stepIdx = 0;
@@ -40,7 +41,7 @@ export async function render(root) {
       drawAll(-1);
       stepIdx = 0;
     } catch (err) {
-      $('#pl-error').innerHTML = `<div class="error-box">${err.message}</div>`;
+      $('#pl-error').innerHTML = `<div class="error-box">${errText(err)}</div>`;
     }
   }
 
@@ -61,15 +62,18 @@ export async function render(root) {
       const val = mode === 'max'
         ? Math.max(...region.flat())
         : region.flat().reduce((a, b) => a + b, 0) / (size * size);
-      const [OW] = [data.output_shape[1]];
-      $('#pl-detail').innerHTML =
-        `Window (row ${r}, col ${c}): ${region.map(row => '[' + row.map(v => v.toFixed(1)).join(', ') + ']').join(' ')}` +
-        ` → ${mode} = <b>${val.toFixed(2)}</b> → output[${Math.floor(highlightIdx / OW)}, ${highlightIdx % OW}]`;
+      const OW = data.output_shape[1];
+      $('#pl-detail').innerHTML = t('pooling.windowDetail', {
+        r, c,
+        region: region.map(row => '[' + row.map(v => v.toFixed(1)).join(', ') + ']').join(' '),
+        mode, val: `<b>${val.toFixed(2)}</b>`,
+        i: Math.floor(highlightIdx / OW), j: highlightIdx % OW,
+      });
     }
   }
 
   function partial(upto) {
-    const [OH, OW] = data.output_shape;
+    const OW = data.output_shape[1];
     return data.output.map((row, i) => row.map((v, j) =>
       i * OW + j <= upto ? v : 0));
   }
@@ -77,7 +81,7 @@ export async function render(root) {
   function play() {
     if (!data) return;
     if (timer) { stop(); return; }
-    $('#pl-play').textContent = '⏸ Stop';
+    $('#pl-play').textContent = t('common.stop');
     timer = setInterval(() => {
       drawAll(stepIdx);
       stepIdx++;
@@ -85,7 +89,7 @@ export async function render(root) {
     }, 400);
   }
   function stop() {
-    if (timer) { clearInterval(timer); timer = null; $('#pl-play').textContent = '▶ Animate window'; }
+    if (timer) { clearInterval(timer); timer = null; $('#pl-play').textContent = t('common.animate'); }
   }
 
   $('#pl-run').onclick = compute;

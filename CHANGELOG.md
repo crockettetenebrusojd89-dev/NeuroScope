@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.0] - 2026-09-30
+
+### Added
+- **Full UI internationalization** with three language modes: 中文 (default),
+  中英双语 (bilingual), English.
+  - Centralized i18n system: `app/static/js/i18n.js` + locale resources
+    `locales/zh-CN.js` / `locales/en-US.js` (217 keys each, parity-checked).
+  - Language switcher in the sidebar; the choice persists via localStorage
+    and applies instantly without a page reload.
+  - Bilingual mode renders main page titles in both languages and keeps
+    normal UI text uncluttered.
+  - Terminology policy: natural Chinese for UI text, 「中文（English）」 for
+    first-occurrence technical terms; code identifiers, formulas, API and
+    model names stay in English.
+- Tensor Lab explanations and shape errors are now returned by the backend as
+  structured i18n keys + params and rendered client-side in the active
+  language (e.g. reshape mismatch errors are fully localized).
+- Chinese font stack (PingFang SC / Microsoft YaHei / Noto Sans SC) and a
+  responsive layout for narrow screens.
+
+### Changed
+- All 13 lab pages now source every user-visible string from the locale
+  resources — no per-page hardcoded UI text.
+
+### Fixed
+- **Playground never trained from the browser**: the frontend read
+  `r.sessionId` while the API returns `session_id` — sessions silently
+  failed. Found and fixed via real-browser end-to-end verification.
+- `relu_grad` crashed on scalar (Python float) inputs
+  (`/api/activations/eval`).
+- `/api/cnn/pool` returned HTTP 500 when `stride` was sent as `null`
+  (pooling page default).
+- Static assets are now served with `Cache-Control: no-cache` so UI updates
+  reach the browser without a hard refresh.
+
 ## [0.1.0] - 2026-09-30
 
 Initial public release.

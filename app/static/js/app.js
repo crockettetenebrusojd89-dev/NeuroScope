@@ -1,43 +1,88 @@
-// NeuroScope SPA shell: sidebar routing + page lazy-loading.
+// NeuroScope SPA shell: sidebar routing, page lazy-loading, language switching.
 
-const PAGES = {
-  tensor:        { title: 'Tensor & Shape Lab',      desc: 'See how reshape, transpose, matmul, broadcasting and axis reductions transform tensor shapes.', mod: 'tensor' },
-  activations:   { title: 'Activations Lab',         desc: 'Activation functions, their derivatives, and live value/gradient readouts.', mod: 'activations' },
-  losses:        { title: 'Loss Lab',                desc: 'Change a prediction and watch the loss respond in real time.', mod: 'losses' },
-  graph:         { title: 'Computational Graph',     desc: 'Step through a forward pass, then a backward pass, watching the chain rule accumulate gradients.', mod: 'graph' },
-  playground:    { title: 'Neural Network Playground', desc: 'Build an MLP, train it live on 2D datasets, and watch the decision boundary form.', mod: 'playground' },
-  backprop:      { title: 'Backpropagation Visualizer', desc: 'Loss → output gradient → per-layer dW/db, summary first with drill-down.', mod: 'backprop' },
-  diagnostics:   { title: 'Gradient Diagnostics',    desc: 'Per-layer gradient norms with vanishing/exploding detection.', mod: 'diagnostics' },
-  optimizers:    { title: 'Optimization Lab',        desc: 'SGD, Momentum, RMSProp and Adam racing across 2D loss landscapes.', mod: 'optimizers' },
-  init:          { title: 'Initialization Lab',      desc: 'Zeros / Random / Xavier / He: activation variance and gradient norms through a deep network.', mod: 'init' },
-  lr:            { title: 'Learning Rate Lab',       desc: 'Too small, just right, too large — compare loss curves at different learning rates.', mod: 'lr' },
-  regularization:{ title: 'Regularization Lab',      desc: 'None vs L1 vs L2 vs Dropout: overfitting, generalization and boundary complexity.', mod: 'regularization' },
-  cnn:           { title: 'Convolution Lab',         desc: 'Sliding-window convolution: kernel, element-wise products, summation, feature map.', mod: 'cnn' },
-  pooling:       { title: 'Pooling Lab',             desc: 'Max and average pooling visualized window by window.', mod: 'pooling' },
+import { t, raw, getMode, setMode, onLanguageChange } from './i18n.js';
+
+const PAGE_ORDER = [
+  { group: 'fundamentals', pages: ['tensor', 'activations', 'losses', 'graph'] },
+  { group: 'networks', pages: ['playground', 'backprop', 'diagnostics'] },
+  { group: 'training', pages: ['optimizers', 'init', 'lr', 'regularization'] },
+  { group: 'convolution', pages: ['cnn', 'pooling'] },
+];
+
+const PAGE_MODS = {
+  tensor: 'tensor', activations: 'activations', losses: 'losses', graph: 'graph',
+  playground: 'playground', backprop: 'backprop', diagnostics: 'diagnostics',
+  optimizers: 'optimizers', init: 'init', lr: 'lr', regularization: 'regularization',
+  cnn: 'cnn', pooling: 'pooling',
 };
 
 const loaded = {};
+let currentKey = null;
+
+function renderNav() {
+  const nav = document.getElementById('nav');
+  nav.innerHTML = PAGE_ORDER.map(({ group, pages }) => `
+    <div class="nav-group">${t(`nav.${group}`)}</div>
+    ${pages.map(p => `<a data-page="${p}" class="nav-item">${t(`nav.${p}`)}</a>`).join('')}
+  `).join('') + `
+    <div class="nav-group">${t('lang.label')}</div>
+    <div class="lang-switch" id="lang-switch">
+      <button data-mode="zh">中文</button>
+      <button data-mode="bi">中英双语</button>
+      <button data-mode="en">English</button>
+    </div>`;
+  document.getElementById('brand-sub').textContent = t('app.sub');
+  document.getElementById('sidebar-footer').textContent = `v0.2.0 · ${t('app.footer')}`;
+  markActive();
+  markLang();
+}
+
+function markActive() {
+  document.querySelectorAll('.nav-item').forEach(el =>
+    el.classList.toggle('active', el.dataset.page === currentKey));
+}
+
+function markLang() {
+  document.querySelectorAll('#lang-switch button').forEach(b =>
+    b.classList.toggle('active', b.dataset.mode === getMode()));
+}
 
 async function showPage(key) {
-  const page = PAGES[key] || PAGES.tensor;
-  document.querySelectorAll('.nav-item').forEach(el =>
-    el.classList.toggle('active', el.dataset.page === key));
-  document.getElementById('page-title').textContent = page.title;
-  document.getElementById('page-desc').textContent = page.desc;
+  if (!PAGE_MODS[key]) key = 'tensor';
+  currentKey = key;
+  markActive();
+
+  // main title: bilingual mode renders 中文 + English on two lines
+  const titleEl = document.getElementById('page-title');
+  if (getMode() === 'bi') {
+    const both = raw(`pages.${key}.title`);
+    titleEl.innerHTML = `${both.zh}<span class="title-en">${both.en}</span>`;
+  } else {
+    titleEl.textContent = t(`pages.${key}.title`);
+  }
+  document.getElementById('page-desc').textContent = t(`pages.${key}.desc`);
+
   const container = document.getElementById('page-content');
   container.innerHTML = '';
   try {
-    if (!loaded[page.mod]) loaded[page.mod] = await import(`./pages/${page.mod}.js`);
-    await loaded[page.mod].render(container);
+    const mod = PAGE_MODS[key];
+    if (!loaded[mod]) loaded[mod] = await import(`./pages/${mod}.js`);
+    await loaded[mod].render(container);
   } catch (err) {
-    container.innerHTML = `<div class="error-box">Failed to load page: ${err.message}</div>`;
+    container.innerHTML = `<div class="error-box">${t('app.loadFailed', { msg: err.message })}</div>`;
     console.error(err);
   }
 }
 
 document.getElementById('nav').addEventListener('click', e => {
   const item = e.target.closest('.nav-item');
-  if (item) { location.hash = item.dataset.page; }
+  if (item) { location.hash = item.dataset.page; return; }
+  const langBtn = e.target.closest('#lang-switch button');
+  if (langBtn) setMode(langBtn.dataset.mode);
 });
 window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
+onLanguageChange(() => { renderNav(); showPage(currentKey || 'tensor'); });
+
+document.documentElement.lang = getMode() === 'en' ? 'en' : 'zh-CN';
+renderNav();
 showPage(location.hash.slice(1) || 'tensor');

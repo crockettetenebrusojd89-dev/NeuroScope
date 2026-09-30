@@ -54,3 +54,11 @@ def test_numerical_gradients():
 def test_gelu_known_values():
     np.testing.assert_allclose(A.gelu(np.array([0.0])), [0.0], atol=1e-12)
     assert A.gelu(np.array([3.0]))[0] > 2.99  # ≈ identity for large x
+
+
+def test_scalar_inputs():
+    """Activations and grads must accept plain Python floats (API eval path)."""
+    for name in ["relu", "sigmoid", "tanh", "leaky_relu", "gelu"]:
+        fn, grad = A.get(name)
+        float(fn(1.0))
+        float(grad(1.0))

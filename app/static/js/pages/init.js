@@ -1,5 +1,6 @@
 import { api } from '../api.js';
-import { lineChart, barChart } from '../plot.js';
+import { lineChart } from '../plot.js';
+import { t, errText } from '../i18n.js';
 
 const COLORS = { zeros: '#8b93a3', random: '#e5534b', xavier: '#4f8ff7', he: '#3fb96f' };
 
@@ -7,18 +8,18 @@ export async function render(root) {
   root.innerHTML = `
     <div class="panel">
       <div class="controls">
-        <div class="field"><label>Hidden activation</label>
+        <div class="field"><label>${t('init.hiddenAct')}</label>
           <select id="i-act"><option>tanh</option><option>relu</option><option>sigmoid</option></select></div>
-        <button id="i-run">Run experiment</button>
-        <span class="hint">A 10-layer MLP (width 32) with each initializer: activation variance + gradient norm per layer.</span>
+        <button id="i-run">${t('init.run')}</button>
+        <span class="hint">${t('init.hint')}</span>
       </div>
       <div id="i-error"></div>
     </div>
     <div class="grid-2">
-      <div class="panel"><h3>Activation variance per layer</h3><canvas id="i-var" class="plot"></canvas>
-        <p class="hint" style="margin-top:8px">Healthy init keeps variance roughly flat. Zeros → dead network; too-large random → saturation.</p></div>
-      <div class="panel"><h3>‖dW‖ per layer (log scale)</h3><canvas id="i-grad" class="plot"></canvas>
-        <p class="hint" style="margin-top:8px">Vanishing: norms collapse toward early layers. Exploding: they blow up. Xavier/He keep them stable.</p></div>
+      <div class="panel"><h3>${t('init.varTitle')}</h3><canvas id="i-var" class="plot"></canvas>
+        <p class="hint" style="margin-top:8px">${t('init.varHint')}</p></div>
+      <div class="panel"><h3>${t('init.gradTitle')}</h3><canvas id="i-grad" class="plot"></canvas>
+        <p class="hint" style="margin-top:8px">${t('init.gradHint')}</p></div>
     </div>`;
 
   const $ = id => root.querySelector(id);
@@ -39,7 +40,7 @@ export async function render(root) {
         label: n, color: COLORS[n],
       })), { height: 300 });
     } catch (err) {
-      $('#i-error').innerHTML = `<div class="error-box">${err.message}</div>`;
+      $('#i-error').innerHTML = `<div class="error-box">${errText(err)}</div>`;
     }
   }
   $('#i-run').onclick = run;

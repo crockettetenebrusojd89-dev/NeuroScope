@@ -1,23 +1,24 @@
 import { api } from '../api.js';
 import { lineChart } from '../plot.js';
+import { t } from '../i18n.js';
 
 export async function render(root) {
   root.innerHTML = `
     <div class="panel">
       <div class="controls">
-        <div class="field"><label>Activation</label>
+        <div class="field"><label>${t('activations.activation')}</label>
           <select id="a-name">
             <option>relu</option><option>sigmoid</option><option>tanh</option>
             <option>leaky_relu</option><option>gelu</option><option>softmax</option>
           </select></div>
-        <div class="field"><label>Input x = <span id="a-xv">1.00</span></label>
+        <div class="field"><label>${t('activations.inputX')}<span id="a-xv">1.00</span></label>
           <input type="range" id="a-x" min="-5" max="5" step="0.05" value="1" style="width:260px"/></div>
-        <div class="field"><span class="metric-label">output f(x)</span><span class="metric" id="a-y">–</span></div>
-        <div class="field"><span class="metric-label">gradient f′(x)</span><span class="metric" id="a-dy">–</span></div>
+        <div class="field"><span class="metric-label">${t('activations.outputY')}</span><span class="metric" id="a-y">–</span></div>
+        <div class="field"><span class="metric-label">${t('activations.gradient')}</span><span class="metric" id="a-dy">–</span></div>
       </div>
     </div>
-    <div class="panel"><h3>Function & derivative</h3><canvas id="a-canvas" class="plot"></canvas>
-      <p class="hint" style="margin-top:8px">Blue: f(x) · Orange: f′(x) · Dot: current x. Softmax is shown as the first component of softmax([x, 0, 0]).</p></div>`;
+    <div class="panel"><h3>${t('activations.chartTitle')}</h3><canvas id="a-canvas" class="plot"></canvas>
+      <p class="hint" style="margin-top:8px">${t('activations.note')}</p></div>`;
 
   const $ = id => root.querySelector(id);
   let curve = null, markerIdx = 0;

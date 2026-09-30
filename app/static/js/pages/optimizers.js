@@ -1,5 +1,6 @@
 import { api } from '../api.js';
 import { contourPlot, lineChart } from '../plot.js';
+import { t, errText } from '../i18n.js';
 
 const OPT_COLORS = { sgd: '#4f8ff7', momentum: '#f7a24f', rmsprop: '#3fb96f', adam: '#a371f7' };
 
@@ -7,25 +8,25 @@ export async function render(root) {
   root.innerHTML = `
     <div class="panel">
       <div class="controls">
-        <div class="field"><label>Landscape</label>
-          <select id="o-fn"><option value="quadratic">Elongated bowl (0.4x² + 4y²)</option>
-            <option value="rosenbrock">Rosenbrock valley</option>
-            <option value="saddle">Saddle (x² − 2y² + 0.3xy)</option></select></div>
-        <div class="field"><label>Optimizer</label>
+        <div class="field"><label>${t('optimizers.landscape')}</label>
+          <select id="o-fn"><option value="quadratic">${t('optimizers.fn.quadratic')}</option>
+            <option value="rosenbrock">${t('optimizers.fn.rosenbrock')}</option>
+            <option value="saddle">${t('optimizers.fn.saddle')}</option></select></div>
+        <div class="field"><label>${t('optimizers.optimizer')}</label>
           <select id="o-opt"><option>sgd</option><option>momentum</option><option>rmsprop</option><option>adam</option></select></div>
         <div class="field"><label>lr</label><input type="number" id="o-lr" value="0.1" step="0.01" style="width:70px"/></div>
         <div class="field"><label>momentum</label><input type="number" id="o-mom" value="0.9" step="0.05" style="width:70px"/></div>
         <div class="field"><label>β1</label><input type="number" id="o-b1" value="0.9" step="0.01" style="width:70px"/></div>
         <div class="field"><label>β2</label><input type="number" id="o-b2" value="0.999" step="0.001" style="width:80px"/></div>
-        <div class="field"><label>Steps</label><input type="number" id="o-steps" value="60" min="5" max="500" style="width:70px"/></div>
-        <button id="o-run">Run</button>
-        <button id="o-compare" class="secondary">Compare all 4</button>
+        <div class="field"><label>${t('optimizers.steps')}</label><input type="number" id="o-steps" value="60" min="5" max="500" style="width:70px"/></div>
+        <button id="o-run">${t('optimizers.run')}</button>
+        <button id="o-compare" class="secondary">${t('optimizers.compareAll')}</button>
       </div>
     </div>
     <div class="grid-2">
-      <div class="panel"><h3>Loss landscape & optimization path</h3><canvas id="o-map" class="plot"></canvas></div>
-      <div class="panel"><h3>Loss along the path</h3><canvas id="o-loss" class="plot"></canvas>
-        <p class="hint" style="margin-top:8px">Drag on the landscape to move the start point, then Run again.</p></div>
+      <div class="panel"><h3>${t('optimizers.mapTitle')}</h3><canvas id="o-map" class="plot"></canvas></div>
+      <div class="panel"><h3>${t('optimizers.lossTitle')}</h3><canvas id="o-loss" class="plot"></canvas>
+        <p class="hint" style="margin-top:8px">${t('optimizers.clickHint')}</p></div>
     </div>
     <div id="o-error"></div>`;
 
@@ -55,18 +56,14 @@ export async function render(root) {
       const paths = results.map(([n, r]) => ({
         points: r.path, color: OPT_COLORS[n], label: n,
       }));
-      drawMap(lastResult, paths);
+      contourPlot($('#o-map'), lastResult.grid, lastResult.extent, paths, { height: 380 });
       lineChart($('#o-loss'), results.map(([n, r]) => ({
         x: r.losses.map((_, i) => i + 1), y: r.losses.map(v => Math.max(v, 1e-12)),
         label: n, color: OPT_COLORS[n],
       })), { height: 280 });
     } catch (err) {
-      $('#o-error').innerHTML = `<div class="error-box">${err.message}</div>`;
+      $('#o-error').innerHTML = `<div class="error-box">${errText(err)}</div>`;
     }
-  }
-
-  function drawMap(r, paths) {
-    contourPlot($('#o-map'), r.grid, r.extent, paths, { height: 380 });
   }
 
   $('#o-map').addEventListener('click', e => {

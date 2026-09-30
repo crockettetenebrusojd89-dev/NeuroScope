@@ -12,7 +12,10 @@ and checked by hand.
 
 ![python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
-![tests](https://img.shields.io/badge/tests-28%20passing-brightgreen)
+![tests](https://img.shields.io/badge/tests-29%20passing-brightgreen)
+![i18n](https://img.shields.io/badge/i18n-%E4%B8%AD%E6%96%87%20%C2%B7%20%E4%B8%AD%E8%8B%B1%E5%8F%8C%E8%AF%AD%20%C2%B7%20English-orange)
+
+**界面语言 / UI languages: 中文（默认）· 中英双语 · English**
 
 ---
 
@@ -57,12 +60,25 @@ and checked by hand.
 
 ## Screenshots
 
-> Placeholders — real screenshots/GIFs will be added from actual runs
-> (see [CONTRIBUTING](CONTRIBUTING.md): no fabricated results).
+Captured from real runs (Chinese UI shown; English and bilingual modes available).
 
-| Playground | Computational Graph | Optimization Lab |
+| Network Playground (神经网络实验场) | Computational Graph (计算图) | Optimization Lab (优化器实验室) |
 |---|---|---|
-| `docs/screenshots/playground.png` *(todo)* | `docs/screenshots/graph.png` *(todo)* | `docs/screenshots/optimizers.png` *(todo)* |
+| ![Playground](docs/screenshots/playground-zh.png) | ![Graph](docs/screenshots/graph-zh.png) | ![Optimizers](docs/screenshots/optimizers-zh.png) |
+
+## Internationalization
+
+The whole UI ships in three language modes, switchable instantly from the
+sidebar and persisted across sessions:
+
+- **中文** (default) — natural Chinese UI with「中文（English）」terminology
+- **中英双语** — main titles in both languages, uncluttered body text
+- **English**
+
+Implementation: a central i18n module (`app/static/js/i18n.js`) with locale
+resources (`locales/zh-CN.js`, `locales/en-US.js`, 217 keys each). Even the
+Tensor Lab's explanations and error messages are localized end-to-end: the
+backend returns structured i18n keys + params, rendered client-side.
 
 ## Installation
 
@@ -97,7 +113,7 @@ uvicorn app.main:app --host 127.0.0.1 --port 8000
 pytest -q
 ```
 
-28 tests, including **numerical gradient checking** for every backward pass
+29 tests, including **numerical gradient checking** for every backward pass
 and hand-computed convolution/pooling references.
 
 ## Architecture

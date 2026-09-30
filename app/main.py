@@ -14,8 +14,19 @@ from app.api.routes import router
 
 STATIC_DIR = Path(__file__).parent / "static"
 
-app = FastAPI(title="NeuroScope", version="0.1.0")
+app = FastAPI(title="NeuroScope", version="0.2.0")
 app.include_router(router)
+
+
+@app.middleware("http")
+async def no_cache_static(request, call_next):
+    """Static assets must revalidate so UI updates reach browsers at once."""
+    response = await call_next(request)
+    if request.url.path.startswith("/static") or request.url.path == "/":
+        response.headers["Cache-Control"] = "no-cache"
+    return response
+
+
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 

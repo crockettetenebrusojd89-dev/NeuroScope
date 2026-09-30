@@ -17,7 +17,8 @@ def relu(x):
 
 
 def relu_grad(x):
-    return (x > 0.0).astype(np.float64)
+    # np.greater works for both scalars and arrays (a Python bool has no .astype)
+    return np.greater(x, 0.0).astype(np.float64)
 
 
 def sigmoid(x):
