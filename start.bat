@@ -3,7 +3,7 @@ rem NeuroScope one-click launcher for Windows.
 rem Creates/uses a project-local virtual environment (never touches global Python).
 
 setlocal
-cd /d %~dp0
+cd /d "%~dp0"
 set VENV_DIR=%~dp0venv
 set PY=%VENV_DIR%\Scripts\python.exe
 
@@ -14,10 +14,10 @@ echo ============================================
 if not exist "%PY%" (
     echo [1/3] Creating project virtual environment...
     where py >nul 2>nul
-    if %errorlevel%==0 (
-        py -3 -m venv "%VENV_DIR%"
-    ) else (
+    if errorlevel 1 (
         python -m venv "%VENV_DIR%"
+    ) else (
+        py -3 -m venv "%VENV_DIR%"
     )
     if not exist "%PY%" (
         echo ERROR: could not create venv. Is Python 3.11+ installed and on PATH?

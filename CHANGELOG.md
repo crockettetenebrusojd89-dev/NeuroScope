@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and validation tests; no nonfinite result clamping in P2 APIs.
 
 ### Fixed
+- Windows launcher checks the current command errorlevel when selecting py/python; avoid stale expansion inside a batch block and quote the project directory. Verified with a real cmd missing-launcher case.
 - Backprop gradient-flow labels now run Loss → last layer → first layer → Input, with arrows following the actual backward direction. Two rendered-JS regressions added.
 - Playground reloads dataset points when building a changed configuration, so the boundary and displayed samples refer to the same dataset. Two rendered-JS regression assertions added.
 - CNN animation now displays and multiplies the actual zero-padded input, matching feature-map values at every window. Stop animation on navigation; API and rendered-JS regressions added.
