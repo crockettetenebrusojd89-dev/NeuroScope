@@ -18,6 +18,8 @@ const PAGE_MODS = {
 
 const loaded = {};
 let currentKey = null;
+let pageVersion = 0;
+let disposePage = null;
 
 function renderNav() {
   const nav = document.getElementById('nav');
@@ -49,6 +51,9 @@ function markLang() {
 
 async function showPage(key) {
   if (!PAGE_MODS[key]) key = 'tensor';
+  const version = ++pageVersion;
+  if (disposePage) disposePage();
+  disposePage = null;
   currentKey = key;
   markActive();
 
@@ -63,13 +68,18 @@ async function showPage(key) {
   document.getElementById('page-desc').textContent = t(`pages.${key}.desc`);
 
   const container = document.getElementById('page-content');
-  container.innerHTML = '';
+  const pageRoot = document.createElement('div');
+  container.replaceChildren(pageRoot);
   try {
     const mod = PAGE_MODS[key];
     if (!loaded[mod]) loaded[mod] = await import(`./pages/${mod}.js`);
-    await loaded[mod].render(container);
+    if (version !== pageVersion) return;
+    const dispose = await loaded[mod].render(pageRoot);
+    if (version === pageVersion) disposePage = typeof dispose === 'function' ? dispose : null;
+    else if (typeof dispose === 'function') dispose();
   } catch (err) {
-    container.innerHTML = `<div class="error-box">${t('app.loadFailed', { msg: err.message })}</div>`;
+    if (version !== pageVersion) return;
+    pageRoot.innerHTML = `<div class="error-box">${t('app.loadFailed', { msg: err.message })}</div>`;
     console.error(err);
   }
 }

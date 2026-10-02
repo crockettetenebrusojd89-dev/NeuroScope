@@ -105,7 +105,7 @@ export async function render(root) {
   $('#g-auto').onclick = async () => {
     if (playing) { playing = false; return; }
     playing = true;
-    while (playing && (fwdQueue.length || bwdQueue.length)) {
+    while (playing && root.isConnected && (fwdQueue.length || bwdQueue.length)) {
       fwdQueue.length ? stepForward() : stepBackward();
       await new Promise(r => setTimeout(r, 650));
     }
@@ -113,6 +113,7 @@ export async function render(root) {
   };
 
   draw();
+  return () => { playing = false; };
 }
 
 function layout(names) {
@@ -130,7 +131,7 @@ function layout(names) {
   const out = {};
   names.forEach(n => {
     const [fx, fy] = P[n] || [Math.random() * 0.8 + 0.1, Math.random() * 0.8 + 0.1];
-    out[n] = { fx, fy, get x() { return fx * (document.querySelector('#g-canvas').clientWidth || 800); }, get y() { return fy * 420; } };
+    out[n] = { fx, fy, get x() { return fx * (document.querySelector('#g-canvas')?.clientWidth || 800); }, get y() { return fy * 420; } };
   });
   return out;
 }

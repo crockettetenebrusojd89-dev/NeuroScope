@@ -128,6 +128,7 @@ export async function render(root) {
   async function step(first = false) {
     if (!sessionId) return;
     const r = await api('/playground/step', { session_id: sessionId, epochs: first ? 1 : 5 });
+    if (!root.isConnected) return;
     const h = r.history;
     $('#p-epoch').textContent = r.epoch;
     $('#p-tl').textContent = last(h.train_loss).toFixed(4);
@@ -153,6 +154,7 @@ export async function render(root) {
     $('#p-pause').disabled = false; $('#p-start').disabled = true;
     $('#p-status').textContent = t('playground.training', { sid: sessionId });
     timer = setInterval(async () => {
+      if (!root.isConnected) { stop(); return; }
       try { await step(); } catch (e) { stop(); errBox(e); }
     }, 220);
   }
@@ -177,6 +179,7 @@ export async function render(root) {
   // auto-preview the dataset on first visit
   await loadData();
   drawDataset();
+  return stop;
 }
 
 function last(arr) { return arr[arr.length - 1]; }

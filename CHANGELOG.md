@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Fixed
+- Isolate each SPA page mount and ignore stale module imports so delayed API
+  responses cannot update a replacement page. Stop training and graph playback
+  when leaving their pages. Independently reproduced during takeover.
+
 ## [0.2.0] - 2026-09-30
 
 ### Added
