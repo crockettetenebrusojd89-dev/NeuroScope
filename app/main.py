@@ -15,7 +15,7 @@ from app.api.p2 import router as p2_router
 
 STATIC_DIR = Path(__file__).parent / "static"
 
-app = FastAPI(title="NeuroScope", version="0.2.0")
+app = FastAPI(title="NeuroScope", version="0.3.0")
 app.include_router(router)
 app.include_router(p2_router)
 

@@ -59,6 +59,9 @@ Activate the environment:
 source venv/bin/activate
 ```
 
+If PowerShell activation is restricted, use `venv\Scripts\python.exe` instead
+of `python` in the commands below; activation is optional.
+
 Then install and run:
 
 ```sh
@@ -149,8 +152,10 @@ With the virtual environment active:
 ```sh
 python -m pytest -q
 node tests/validate_frontend.mjs
-# Keep the server running in another terminal:
-python tests/live_smoke.py
+node tests/validate_docs.mjs
+python tests/validate_live.py
+# Or use an existing server on port 8000:
+# python tests/live_smoke.py
 ```
 
 The release-preparation baseline had **106 passing Python tests**. The current
@@ -158,8 +163,8 @@ suite includes an additional padded-window regression, frontend routing,
 translation parity, rendered-page regressions, and real HTTP smoke checks.
 See [release validation](docs/RELEASE_VALIDATION_v0.3.0.md) for exact measured
 results and [previous takeover validation](docs/TAKEOVER_VALIDATION.md) for history.
-The local validation commands also check frontend behavior and live HTTP.
-A remote GitHub Actions run is still pending publication.
+GitHub Actions runs the same four checks on Linux (Python 3.11/3.12/3.13)
+and Windows (3.13). A remote Actions run is still pending publication.
 
 ## Scope and Limitations
 

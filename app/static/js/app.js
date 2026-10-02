@@ -37,7 +37,7 @@ function renderNav() {
     </div>`;
   document.getElementById('nav-toggle').textContent = t('app.browseLabs');
   document.getElementById('brand-sub').textContent = t('app.sub');
-  document.getElementById('sidebar-footer').textContent = `v0.2.0 · ${t('app.footer')}`;
+  document.getElementById('sidebar-footer').textContent = `v0.3.0 · ${t('app.footer')}`;
   markActive();
   markLang();
 }

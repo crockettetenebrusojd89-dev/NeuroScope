@@ -17,3 +17,11 @@ Thumbs.db
 
 # Misc
 *.log
+
+# Release verification scratch (never publish clones, frames or installation caches)
+.release-work/
+.env
+.env.*
+!.env.example
+.coverage
+htmlcov/

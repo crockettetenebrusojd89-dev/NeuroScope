@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.0] - Unreleased (prepared)
+
 ### Added
+- Product README, six primary English screenshots, Chinese home, three authentic GIF demos with provenance/reproduction steps, and prepared publishing/deployment/release notes.
+- CI checks match local Python, JS/i18n, docs/assets and isolated startup/HTTP validation; feature freeze for v0.3.x.
 - Responsive navigation toggle: the full sidebar remains available while narrow-screen first visits lead with the project and Start Learning.
 - CS231n topic companions with official reading links, plus documented learning order; no copied course material or guessed lecture numbers.
 - Three selectable recommended routes: deep learning, computer vision and attention foundations, using existing labs only.

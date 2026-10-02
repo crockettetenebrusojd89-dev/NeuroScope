@@ -1,40 +1,51 @@
 # Contributing to NeuroScope
 
-Thanks for your interest! NeuroScope is a learning tool — clarity beats
-cleverness in every contribution.
+NeuroScope is a learning tool. Favor readable calculations and useful experiments.
 
-## Ground rules
+## Feature freeze
 
-1. **Core math stays in `neuroscope/` and stays NumPy-only.** No deep-learning
-   frameworks in the engine — the point is readable forward/backward code.
-2. **UI stays in `app/`.** The frontend talks to the engine only through the
-   JSON API in `app/api/routes.py`.
-3. **Every new backward pass needs a numerical gradient check** in `tests/`.
-4. **Don't fabricate results.** Screenshots, metrics and examples must come
-   from real runs.
-5. Keep modules small and focused; avoid single files that do everything.
+v0.3.x accepts bug fixes, learning UX, accessibility, documentation, tests,
+and performance improvements. No new deep learning labs are planned for this
+series. The scope of v0.4 is undecided; discuss scope before implementing more models.
+
+## Design rules
+
+- Keep the mathematical engine in `neuroscope/`, NumPy-only and independent of UI code.
+- Keep JSON API adapters in `app/api/` and presentation in `app/static/`.
+- Use the existing `i18n.js` and both locale dictionaries for every new UI label.
+  Do not add page-level language conditionals. Formulas, shapes and API names stay invariant.
+- Any backward-pass change needs a numerical gradient check; fix regressions with focused tests.
+- All displayed results, screenshots, and demos must come from real computations.
+- Preserve Git history and use focused commits. Fix pre-existing bugs separately.
 
 ## Development setup
 
-```bash
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # macOS/Linux
-pip install -r requirements.txt
-pytest -q
-uvicorn app.main:app --reload
+Follow the [README](README.md) Quick Start. The runtime is Python 3.11–3.13;
+Node 24 runs validation and is not a browser/runtime dependency. There is no
+frontend build or package installation.
+
+```sh
+python -m pytest -q
+node tests/validate_frontend.mjs
+node tests/validate_docs.mjs
+python tests/validate_live.py
 ```
 
-## Pull request checklist
+The last command launches its own server on an available loopback port, checks
+static files and real API responses, and shuts it down. For an existing server
+on port 8000 use `python tests/live_smoke.py` instead. GitHub Actions runs the
+same checks on Linux (Python 3.11/3.12/3.13) and Windows (3.13). A configured
+workflow is not evidence of a successful remote run.
 
-- [ ] `pytest -q` passes locally
-- [ ] New math has docstrings with the formulas
-- [ ] New backward pass has a numerical gradient check
-- [ ] UI changes were opened in a real browser
-- [ ] CHANGELOG.md updated under "Unreleased"
+## Review checklist
 
-## Proposing new labs
+- Run all four validation commands above.
+- Open changed UI in a real browser in Chinese, bilingual and English; check
+  refresh persistence, links, keyboard access, narrow layout, and console errors.
+- Keep both locale keys and interpolation parameters aligned.
+- Update CHANGELOG under Unreleased; document limitations honestly.
+- Record parameters for any changed screenshots or GIFs.
+- Do not commit venv, caches, logs, `.env`, IDE settings, or recording scratch.
 
-Open an issue first with: the concept being taught, the interaction the
-learner performs, and what is visualized. Labs exist to build intuition —
-if a proposed lab is mostly decoration, it will be rejected.
+[Release preparation validation](docs/RELEASE_VALIDATION_v0.3.0.md) records local
+results; [publishing instructions](docs/GITHUB_PUBLISHING.md) describe the owner steps.
