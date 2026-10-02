@@ -66,6 +66,10 @@ Captured from real runs (Chinese UI shown; English and bilingual modes available
 |---|---|---|
 | ![Playground](docs/screenshots/playground-zh.png) | ![Graph](docs/screenshots/graph-zh.png) | ![Optimizers](docs/screenshots/optimizers-zh.png) |
 
+P2 example (captured from a real bilingual run):
+
+![Multi-Head Attention](docs/screenshots/multihead-bi.jpg)
+
 ## Internationalization
 
 The whole UI ships in three language modes, switchable instantly from the
@@ -112,6 +116,7 @@ uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```bash
 pytest -q
 node tests/validate_frontend.mjs   # JS syntax, locale parity, routing regression
+python tests/live_smoke.py       # real HTTP checks; start the app first
 ```
 
 106 tests, including **numerical gradient checking** for every backward pass

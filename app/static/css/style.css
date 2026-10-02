@@ -147,3 +147,6 @@ canvas.plot { width: 100%; background: var(--bg-raised); border-radius: 8px; dis
 .rf-pixel.covered { background: var(--accent-2); }
 .attention-map td { color: #fff; min-width: 72px; }
 .attention-map .query-row td { border-top: 2px solid var(--accent-2); border-bottom: 2px solid var(--accent-2); }
+/* Keep wide numerical tables scrollable inside their panels. */
+#main { min-width: 0; }
+#page-content .grid-2 > *, #page-content .grid-3 > *, #page-content .grid-4 > * { min-width: 0; }

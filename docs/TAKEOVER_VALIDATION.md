@@ -32,7 +32,8 @@ including rapid navigation away from auto-running Learning Rate.
 
 ## P2 progress
 
-All five modules pending until recorded below. No claims based on prior agent screenshots.
+All five modules completed in the required order, each after the previous
+module passed tests and real-browser QA. No partial or unstarted modules remain.
 
 ### P2-1 Normalization — completed
 
@@ -98,3 +99,54 @@ checks passed. Browser displayed −1.8932 at p=.70, −1.8534 at p=.71,
 and restored the target selector for BCE. All six activations were also
 checked with slider changes, producing finite values with zero console errors.
 Added regressions for scalar ReLU and null pool stride from v0.2.0.
+
+## Final cross-module validation
+
+- Full unit/numerical/API regression suite: **106 passed in 0.75s**.
+- `node tests/validate_frontend.mjs`: **26 JS syntax checks**, **298 aligned
+  locale keys**, placeholder parity, literal translation-key existence,
+  and **4 lifecycle assertions** passed.
+- `python tests/live_smoke.py`: **28 real HTTP POST checks passed**:
+  23 successful computations across P0/P1/P2 and 5 expected localized HTTP 400
+  rejections. Health and no-cache headers passed; all response values finite.
+- Real browser: **18 pages × zh/bi/en = 54 checks**, zero error boxes,
+  NaN/Infinity display or console errors. Bilingual mode persisted after reload.
+- Every new lab control exercised; numeric display references recorded per module.
+- Additional original-page regression: all tensor operations yielded expected
+  shapes; training reached epoch **6**, train loss **0.3307**, validation accuracy
+  **88.0%**; Pause worked; Reset recreated a session at epoch **1** as designed.
+  The graph completed forward and backward steps without errors.
+- Wide matrix panels no longer overflow the page. On all 5 new pages, desktop
+  scrollWidth=clientWidth=1265; mobile viewport override 390×844 produced
+  scrollWidth=clientWidth=375 (excluding scrollbar). Override reset after testing.
+- Actual screenshot saved as `docs/screenshots/multihead-bi.jpg`.
+- No original commits squashed or rewritten. Project changes only in E:\NeuroScope.
+
+## Commits created
+
+| Commit | Logical change |
+|---|---|
+| 519bab7 | Fix old SPA navigation race and stop departed-page activity |
+| fba771f | P2-1 Normalization; full suite 45 passed |
+| f5073a7 | P2-2 Receptive Field; full suite 56 passed |
+| d8b683f | P2-3 Residual Connection; full suite 71 passed |
+| 7a9545b | P2-4 Self-Attention; full suite 85 passed |
+| 2a9c2ba | P2-5 Multi-Head Attention; full suite 99 passed |
+| 5304361 | Fix old CE slider chain rule; full suite 106 passed |
+| Final commit (see Git log) | `fix: contain lab tables and record final takeover validation` |
+
+## Remaining limits
+
+- BatchNorm is training-batch 2D [N,D], scalar gamma/beta, no running statistics
+  or inference mode. LayerNorm is over the row feature dimension.
+- RF uses square kernels, symmetric padding and no dilation; both theoretical
+  box and exact sparse real input support are shown.
+- Residual uses tanh square blocks and a fixed linear probe, not trained models
+  or an accuracy comparison. Results depend on seed/scale/depth without filtering.
+- Attention uses supplied numeric embeddings and untrained seeded projections;
+  token text is labels only, with no positional encoding or causal masking.
+- Existing behavior: switching languages re-renders lab controls and resets
+  unsaved values; only language mode persists. Playground sessions are in memory.
+- Existing P0/P1 `_clean` sanitizes nonfinite arrays; P2 strictly rejects them.
+  This takeover verifies teaching workflows, not exhaustive adversarial input
+  fuzzing, security, long-running concurrency or performance on large workloads.

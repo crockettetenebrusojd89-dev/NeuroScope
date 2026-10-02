@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and validation tests; no nonfinite result clamping in P2 APIs.
 
 ### Fixed
+- Keep wide lab matrices scrollable within their panels instead of overflowing
+  the entire page. Verified all five P2 pages at desktop and mobile widths.
 - Correct CE Loss Lab slider gradient: z0=4p−2 requires dL/dp=4*dL/dz0.
   Disable the binary target selector for the fixed-class CE example and
   clarify the formula in both languages. Seven API regression tests added.
