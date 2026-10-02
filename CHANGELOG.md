@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- Chinese README with a Chinese project title, clearer learning routes and startup guidance, Chinese-first screenshots, collapsible English gallery, and verified release/CI links.
+
 ## [0.3.0] - 2026-10-02
 
 ### Added
