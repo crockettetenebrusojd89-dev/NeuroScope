@@ -26,6 +26,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and validation tests; no nonfinite result clamping in P2 APIs.
 
 ### Fixed
+- Correct CE Loss Lab slider gradient: z0=4p−2 requires dL/dp=4*dL/dz0.
+  Disable the binary target selector for the fixed-class CE example and
+  clarify the formula in both languages. Seven API regression tests added.
 - Isolate each SPA page mount and ignore stale module imports so delayed API
   responses cannot update a replacement page. Stop training and graph playback
   when leaving their pages. Independently reproduced during takeover.

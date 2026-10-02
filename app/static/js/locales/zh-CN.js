@@ -178,7 +178,7 @@ export default {
     notes: {
       mse: 'MSE = mean((p − y)²)。梯度随误差线性增长。',
       bce: 'BCE = −[y·log p + (1−y)·log(1−p)]。自信地预测错误会受到严厉惩罚。',
-      cross_entropy: 'logits 取 [4p−2, 0, 0]、真实类别为 0 的 3 类交叉熵。横轴可以看作模型的置信度。',
+      cross_entropy: 'logits 取 [4p−2, 0, 0]、真实类别固定为 0 的 3 类交叉熵。滑块参数为 p，显示梯度为 ∂loss/∂p = 4·∂loss/∂logit₀。',
     },
   },
 

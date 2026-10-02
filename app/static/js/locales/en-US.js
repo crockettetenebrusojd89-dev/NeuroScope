@@ -177,7 +177,7 @@ export default {
     notes: {
       mse: 'MSE = mean((p − y)²). Gradient grows linearly with the error.',
       bce: 'BCE = −[y·log p + (1−y)·log(1−p)]. Confident wrong predictions are punished harshly.',
-      cross_entropy: '3-class CE with logits [4p−2, 0, 0], true class 0. The x-axis acts as the model\'s confidence.',
+      cross_entropy: 'Three-class cross entropy with logits [4p−2, 0, 0] and fixed target class 0. The displayed gradient is ∂loss/∂p = 4·∂loss/∂logit₀.',
     },
   },
 

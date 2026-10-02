@@ -85,3 +85,16 @@ and reproducible seeds. Invalid h=3 for D=4 is a localized HTTP 400.
 Browser tested tokens, X, heads, seed, Compute, query and head selectors,
 with h=2 and h=4. Screen-derived Concat@Wo matched displayed output within
 7.2e-7. All three modes rendered with zero error boxes and console errors.
+
+### Additional baseline bug — CE slider gradient
+
+The existing CE route displayed dL/dlogit0 as dL/dp although logit0=4p−2.
+At p=.7 the old gradient was −.473312 while central difference gave
+−1.893249. Fixed the route chain-rule factor, without modifying the core
+loss implementation. The fixed-class CE example now disables the irrelevant
+binary target selector and explains the derivative in both locales.
+Full pytest **106 passed in 0.81s**; frontend static keys/parity/lifecycle
+checks passed. Browser displayed −1.8932 at p=.70, −1.8534 at p=.71,
+and restored the target selector for BCE. All six activations were also
+checked with slider changes, producing finite values with zero console errors.
+Added regressions for scalar ReLU and null pool stride from v0.2.0.

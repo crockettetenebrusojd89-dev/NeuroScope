@@ -13,6 +13,9 @@ function flatten(o,p='') { return Object.fromEntries(Object.entries(o).flatMap((
 const zh=flatten(await locale('zh-CN.js')), en=flatten(await locale('en-US.js'));
 assert.deepEqual(Object.keys(zh).sort(),Object.keys(en).sort());
 for(const k of Object.keys(zh)) assert.deepEqual([...zh[k].matchAll(/\{(\w+)\}/g)].map(m=>m[1]).sort(),[...en[k].matchAll(/\{(\w+)\}/g)].map(m=>m[1]).sort(),k);
+for (const f of js) {
+  for (const m of readFileSync(f,'utf8').matchAll(/\bt\(\s*['"]([\w.]+)['"]/g)) assert.ok(m[1] in zh, `Missing locale key: ${m[1]}`);
+}
 class Element { constructor(){this.children=[];this.dataset={};this.classList={toggle(){}};} replaceChildren(...cs){this.children=cs;} addEventListener(){} }
 const els = Object.fromEntries(['nav','brand-sub','sidebar-footer','page-title','page-desc','page-content'].map(k=>[k,new Element()]));
 let release; const delayed = new Promise(r=>{release=r;}); let oldRoot, newRoot, disposed=0;

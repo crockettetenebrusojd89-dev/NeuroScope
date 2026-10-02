@@ -288,7 +288,8 @@ def loss_eval(payload: dict = Body(...)):
         # 3-class CE with logits [pred*4-2, 0, 0]; target class 0
         z = np.stack([p * 4 - 2, np.zeros_like(p), np.zeros_like(p)], axis=1)
         loss = losses.cross_entropy(np.array([[pred * 4 - 2, 0.0, 0.0]]), np.array([0]))
-        grad = float(losses.cross_entropy_grad(np.array([[pred * 4 - 2, 0.0, 0.0]]), np.array([0]))[0, 0])
+        # The slider controls p, while z0=4p-2: apply dz0/dp=4.
+        grad = 4.0 * float(losses.cross_entropy_grad(np.array([[pred * 4 - 2, 0.0, 0.0]]), np.array([0]))[0, 0])
         curve = np.array(
             [losses.cross_entropy(z[i : i + 1], np.array([0])) for i in range(len(p))]
         )

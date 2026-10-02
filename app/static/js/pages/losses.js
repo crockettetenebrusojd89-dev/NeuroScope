@@ -29,6 +29,8 @@ export async function render(root) {
 
   async function update() {
     const name = $('#l-name').value;
+    // The three-class example fixes class 0; a binary target selector does not apply.
+    $('#l-t').disabled = name === 'cross_entropy';
     $('#l-note').textContent = t(`losses.notes.${name}`);
     const prediction = parseFloat($('#l-p').value);
     $('#l-pv').textContent = prediction.toFixed(2);

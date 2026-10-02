@@ -12,7 +12,7 @@ and checked by hand.
 
 ![python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
-![tests](https://img.shields.io/badge/tests-99%20passing-brightgreen)
+![tests](https://img.shields.io/badge/tests-106%20passing-brightgreen)
 ![i18n](https://img.shields.io/badge/i18n-%E4%B8%AD%E6%96%87%20%C2%B7%20%E4%B8%AD%E8%8B%B1%E5%8F%8C%E8%AF%AD%20%C2%B7%20English-orange)
 
 **界面语言 / UI languages: 中文（默认）· 中英双语 · English**
@@ -114,7 +114,7 @@ pytest -q
 node tests/validate_frontend.mjs   # JS syntax, locale parity, routing regression
 ```
 
-99 tests, including **numerical gradient checking** for every backward pass
+106 tests, including **numerical gradient checking** for every backward pass
 and hand-computed convolution/pooling references.
 
 ## Architecture
