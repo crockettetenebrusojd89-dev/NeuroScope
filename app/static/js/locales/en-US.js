@@ -336,6 +336,26 @@ export default {
   attention: {"tokens": "Token labels (space separated)", "dk": "d_k = d_v", "seed": "Projection seed", "note": "Supply numeric embeddings X; token text labels rows only. Seeded projections are untrained, without positional encodings or a causal mask. This is a math lab, not a pretrained language model.", "query": "Select query token", "raw": "Raw scores", "scaled": "Scaled scores", "weights": "Attention weights", "legend": "Fixed color scale: blue=0, orange=1. Rows are queries, columns are keys; highlighted row is the selected query.", "contributions": "Contributions for {token}", "sum": "Sum the contribution rows to obtain this query output.", "output": "Attention output", "err": {"tokens": "Provide one nonempty token label per input row (at most 32 characters each)."}},
   multihead: {"heads": "Head count", "head": "Head {i}", "inspect": "Inspect head", "note": "d_model is the input width and must be divisible by heads. Each head has independent Wq/Wk/Wv; d_head=d_model/heads. Wo is a separate output projection.", "concat": "Concatenated heads", "projected": "Projected output", "projections": "Independent projections", "headOutput": "Head output", "err": {"divisible": "d_model must be divisible by the head count (heads <= d_model)."}},
   home: {
+  "recommended": "Choose your learning route",
+  "choose": "Start with the basics, or follow the topics you need today.",
+  "paths": {
+    "foundations": {
+      "title": "A · Deep Learning Foundations",
+      "desc": "Values, gradients, and parameter updates.",
+      "hint": "Then try Playground, initialization, and learning rates to connect the ideas."
+    },
+    "vision": {
+      "title": "B · Computer Vision Foundations",
+      "desc": "From local windows to deeper CNNs.",
+      "hint": "Review the chain rule first; skip connections and normalization build on gradient flow."
+    },
+    "attention": {
+      "title": "C · Attention Foundations",
+      "desc": "From dimensions and softmax to multiple heads.",
+      "hint": "Use Activations for softmax, Loss for its objective, and Normalization for shared statistics."
+    }
+  },
+
   "eyebrow": "Learn by seeing the math",
   "intro": "Explore deep learning through small, real calculations. Change an input, watch the result, and follow the gradient.",
   "start": "Start Learning",

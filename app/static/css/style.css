@@ -179,3 +179,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-2); outl
 .learning-arrow { color: var(--text-dim); }
 @media (max-width: 1100px) { .learning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .home-equation { display: none; } }
 @media (max-width: 600px) { .learning-grid { grid-template-columns: 1fr; } .home-hero { padding: 22px; } }
+
+.home-recommended { margin-bottom: 28px; }
+.path-choices { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.path-choice { display: grid; text-align: left; gap: 9px; padding: 18px; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text); font-weight: 400; line-height: 1.5; }
+.path-choice strong { font-size: 14px; }
+.path-choice span { font-size: 12px; color: #aeb8c8; }
+.path-choice[aria-pressed="true"] { border-color: var(--accent); background: rgba(79,143,247,.12); }
+.path-preview { padding: 18px; margin-top: 12px; border-left: 3px solid var(--accent); background: var(--bg-panel); border-radius: 6px; }
+.path-label { font-size: 12px; color: #b8c1d0; margin-bottom: 10px; }
+.path-flow { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin-bottom: 12px; }
+.path-flow a { text-decoration: none; display: inline-block; font-size: 12px; padding: 6px 8px; background: var(--bg-raised); border-radius: 5px; }
+.path-flow li:not(:last-child)::after { content: '→'; margin-left: 8px; color: var(--text-dim); }
+.path-flow span { color: var(--text-dim); }
+.path-preview .hint { color: var(--text-dim); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1000px) { .path-choices { grid-template-columns: 1fr; } }

@@ -41,4 +41,11 @@ for(const [id,level,topic] of steps) {
   assert.ok(new RegExp(`\\b${id}:`).test(shell),`Unknown lab link: ${id}`);
   for(const k of [`nav.${id}`,`home.steps.${id}`,`home.level.${level}`,`home.topic.${topic}`]) assert.ok(k in zh,k);
 }
-console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links`);
+const paths = JSON.parse(home.match(/RECOMMENDED_PATHS = (.*);/)[1]);
+assert.deepEqual(Object.keys(paths),['foundations','vision','attention']);
+for(const [id,labs] of Object.entries(paths)) {
+  assert.equal(labs[0],'tensor');
+  for(const lab of labs) assert.ok(steps.some(step=>step[0]===lab),`Unknown recommended link: ${lab}`);
+  for(const field of ['title','desc','hint']) assert.ok(`home.paths.${id}.${field}` in zh);
+}
+console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links, 3 valid recommended routes`);

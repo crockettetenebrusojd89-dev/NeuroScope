@@ -337,6 +337,26 @@ export default {
   attention: {"tokens": "Token 标签（空格分隔）", "dk": "d_k = d_v", "seed": "投影随机种子", "note": "请提供数值嵌入 X；文本仅标记矩阵行。投影按种子随机生成、未经训练，不含位置编码或因果掩码。本页用于数学实验，不代表预训练语言模型。", "query": "选择查询 token", "raw": "原始分数", "scaled": "缩放后分数", "weights": "注意力权重", "legend": "固定色标：蓝色=0，橙色=1。行表示查询（Query），列表示键（Key）；边框标记所选查询行。", "contributions": "{token} 的加权贡献", "sum": "对贡献矩阵的各行求和，即得到该查询的输出。", "output": "注意力输出", "err": {"tokens": "每个输入行需对应一个非空 token 标签（每个最多 32 个字符）。"}},
   multihead: {"heads": "头数", "head": "第 {i} 头", "inspect": "查看注意力头", "note": "d_model 为输入宽度，必须能被头数整除。各头使用独立 Wq/Wk/Wv，d_head=d_model/heads；Wo 为单独的输出投影。", "concat": "各头拼接", "projected": "投影后输出", "projections": "独立投影", "headOutput": "该头输出", "err": {"divisible": "d_model 必须能被头数整除（头数不能超过 d_model）。"}},
   home: {
+  "recommended": "选择适合你的学习路线",
+  "choose": "从基础开始，或直接学习今天需要的主题。",
+  "paths": {
+    "foundations": {
+      "title": "A · 深度学习基础",
+      "desc": "理解数值、梯度与参数更新。",
+      "hint": "之后可在 Playground、参数初始化和学习率实验中串起这些概念。"
+    },
+    "vision": {
+      "title": "B · 计算机视觉基础",
+      "desc": "从局部窗口走向更深的 CNN。",
+      "hint": "先复习链式法则；残差连接与归一化建立在梯度流动的理解之上。"
+    },
+    "attention": {
+      "title": "C · 注意力基础",
+      "desc": "从维度与 softmax 到多头注意力。",
+      "hint": "在激活函数页学习 softmax，在损失页理解目标，再在归一化页查看统计量的共享方式。"
+    }
+  },
+
   "eyebrow": "看见数学，理解深度学习",
   "intro": "通过小型真实计算探索深度学习。修改输入，观察结果，再沿着梯度理解训练。",
   "start": "开始学习",
