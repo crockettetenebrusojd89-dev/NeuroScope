@@ -7,14 +7,14 @@ const PAGE_ORDER = [
   { group: 'networks', pages: ['playground', 'backprop', 'diagnostics', 'residual'] },
   { group: 'training', pages: ['optimizers', 'init', 'lr', 'regularization', 'normalization'] },
   { group: 'convolution', pages: ['cnn', 'pooling', 'receptive'] },
-  { group: 'attention', pages: ['attention'] },
+  { group: 'attention', pages: ['attention', 'multihead'] },
 ];
 
 const PAGE_MODS = {
   tensor: 'tensor', activations: 'activations', losses: 'losses', graph: 'graph',
   playground: 'playground', backprop: 'backprop', diagnostics: 'diagnostics',
   optimizers: 'optimizers', init: 'init', lr: 'lr', regularization: 'regularization',
-  cnn: 'cnn', pooling: 'pooling', normalization: 'normalization', receptive: 'receptive', residual: 'residual', attention: 'attention',
+  cnn: 'cnn', pooling: 'pooling', normalization: 'normalization', receptive: 'receptive', residual: 'residual', attention: 'attention', multihead: 'multihead',
 };
 
 const loaded = {};

@@ -74,3 +74,14 @@ shapes and token-only-label invariance. Browser tested tokens, X, d_k, seed,
 Compute and query selector. For X=I₂, d_k=3, seed=4, displayed contribution
 row sums matched displayed output [0.949006,-0.547649,-0.083942] within
 1.1e-6 (rounding). All three modes and zero-console checks passed.
+
+### P2-5 Multi-Head Attention — completed
+
+Full pytest **99 passed in 0.69s**; **26 JS files**, **298 locale keys**
+and routing regression passed. Tested N/D/heads combinations including
+N=1,D=1,h=1 and N=2,D=16,h=8; verified each projection, attention row sum,
+head output, concat order, Wo shape, output product, independent heads
+and reproducible seeds. Invalid h=3 for D=4 is a localized HTTP 400.
+Browser tested tokens, X, heads, seed, Compute, query and head selectors,
+with h=2 and h=4. Screen-derived Concat@Wo matched displayed output within
+7.2e-7. All three modes rendered with zero error boxes and console errors.

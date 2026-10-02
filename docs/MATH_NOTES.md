@@ -140,3 +140,12 @@ shows contributions A[i,j]*V[j,:] whose sum is Y[i,:].
 The UI fixes d_v=d_k and uses a shared 0..1 heatmap color scale. Token
 labels do not change X. Projections are seeded untrained random matrices,
 without positional encodings, masking or claims about language semantics.
+
+## 12. Multi-head attention
+
+With d_model=D divisible by h, d_head=D/h. Each head independently samples
+Wq_i/Wk_i/Wv_i[D,d_head], computes scaled_attention[N,d_head] and returns
+its own attention map[N,N]. Concat stacks head outputs along feature axis
+in head-index order, giving [N,D]. A separate Wo[D,D] projects to Y=Concat@Wo.
+No weight sharing across heads, no fabricated heatmaps. Single-head output
+before Wo matches self_attention for the same input, width and seed.

@@ -78,3 +78,8 @@ without nan_to_num/clamping. Structured i18n errors match the existing client.
 `js/lab.js` supplies shared number/table rendering; locale strings remain
 in the existing zh-CN/en-US resources. Each SPA navigation has a dedicated
 mount with a disposal hook for timers; async imports are version guarded.
+
+P2 additionally uses `cnn/receptive_field.py` for exact geometry,
+`core/residual.py` for explicit shared-weight forward/backward stacks, and
+`core/attention.py` for single-/multi-head attention. `attention-view.js`
+shares real-matrix heatmap/contribution rendering between attention pages.

@@ -9,6 +9,7 @@ export default {
     loadFailed: '页面加载失败：{msg}',
   },
   nav: {
+    multihead: "多头注意力",
     attention: "注意力",
     residual: "残差连接",
     receptive: "感受野",
@@ -52,6 +53,7 @@ export default {
     pressAnimate: '点击「播放窗口动画」查看逐步过程。',
   },
   pages: {
+    multihead: {"title": "多头注意力实验室", "desc": "查看多头注意力（Multi-Head Attention）的各头独立 Q/K/V 投影、真实注意力图、拼接与输出投影。"},
     attention: {"title": "自注意力实验室", "desc": "查看 Q/K/V 投影、缩放点积注意力（Scaled Dot-Product Attention）、softmax 权重与逐 token 加权求和。"},
     residual: {"title": "残差连接实验室", "desc": "在相同权重与输出端梯度下，对比普通网络与残差网络（Residual Network）的真实前向传播、反向传播和梯度范数。"},
     receptive: {"title": "感受野实验室", "desc": "配置卷积网络，选择任意深层特征，追踪其在输入上的精确依赖区域（Receptive Field）。"},
@@ -331,4 +333,5 @@ export default {
   rf: {"inputSize": "输入尺寸", "depth": "层数", "kernel": "卷积核尺寸", "stride": "步长（Stride）", "padding": "填充（Padding）", "layer": "第 {i} 层", "mapSize": "特征图尺寸", "note": "使用方形卷积核、对称零填充，无空洞卷积。网格用于选择特征坐标，不代表激活值。", "feature": "选择特征坐标", "selectLayer": "查看层", "input": "精确输入依赖区域", "support": "第 {layer} 层特征 [{row},{col}] 依赖 {count} 个真实输入像素。", "boundsNote": "半开区间的理论边界可能延伸到填充区。橙色仅标记真实依赖像素；步长可能使边界框内出现空洞。"},
   residual: {"depth": "深度", "seed": "随机种子", "scale": "权重尺度", "note": "使用方形 tanh 模块，相加后不再激活。固定线性目标用于观察梯度传递；本实验不训练模型、不比较准确率。", "fair": "两种网络共用输入、种子、权重与输出端梯度，按所选种子直接显示结果。残差梯度也可能衰减或增长；改变深度、尺度和种子来探索。", "gradNorm": "激活梯度范数（线性轴，a₀=X）", "actNorm": "前向激活范数", "stats": "各深度的真实范数", "block": "查看模块", "forward": "前向数值", "backward": "反向：非线性分支 + 恒等捷径"},
   attention: {"tokens": "Token 标签（空格分隔）", "dk": "d_k = d_v", "seed": "投影随机种子", "note": "请提供数值嵌入 X；文本仅标记矩阵行。投影按种子随机生成、未经训练，不含位置编码或因果掩码。本页用于数学实验，不代表预训练语言模型。", "query": "选择查询 token", "raw": "原始分数", "scaled": "缩放后分数", "weights": "注意力权重", "legend": "固定色标：蓝色=0，橙色=1。行表示查询（Query），列表示键（Key）；边框标记所选查询行。", "contributions": "{token} 的加权贡献", "sum": "对贡献矩阵的各行求和，即得到该查询的输出。", "output": "注意力输出", "err": {"tokens": "每个输入行需对应一个非空 token 标签（每个最多 32 个字符）。"}},
+  multihead: {"heads": "头数", "head": "第 {i} 头", "inspect": "查看注意力头", "note": "d_model 为输入宽度，必须能被头数整除。各头使用独立 Wq/Wk/Wv，d_head=d_model/heads；Wo 为单独的输出投影。", "concat": "各头拼接", "projected": "投影后输出", "projections": "独立投影", "headOutput": "该头输出", "err": {"divisible": "d_model 必须能被头数整除（头数不能超过 d_model）。"}},
 };

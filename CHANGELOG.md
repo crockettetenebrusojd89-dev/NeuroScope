@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Multi-Head Attention Lab: independent per-head Q/K/V projections and maps,
+  full concatenation/output projection, query/head selection and strict
+  d_model/head divisibility; 14 shape/numerical/API validation tests.
 - Self-Attention Lab: seeded NumPy Q/K/V projections, raw dot products,
   sqrt(d_k) scaling, stable softmax, fixed-scale true attention heatmaps,
   token selection and explicit weighted contributions/output; 14 tests.

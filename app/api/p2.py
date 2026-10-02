@@ -41,3 +41,11 @@ from neuroscope.core.attention import self_attention
 def attention(payload: dict = Body(...)):
     return compute(self_attention,payload.get('values'),payload.get('tokens'),
                    payload.get('dk',2),payload.get('seed',0))
+
+from neuroscope.core.attention import multi_head_attention
+
+
+@router.post("/multihead")
+def multihead(payload: dict = Body(...)):
+    return compute(multi_head_attention,payload.get('values'),payload.get('tokens'),
+                   payload.get('num_heads',2),payload.get('seed',0))

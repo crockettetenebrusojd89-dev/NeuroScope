@@ -24,7 +24,7 @@ Status legend: ✅ shipped · 🚧 planned
 - ✅ CNN Convolution Lab
 - ✅ Pooling Lab
 
-## P2 — Advanced (in progress)
+## P2 — Advanced ✅ (implemented)
 
 - ✅ **Normalization Lab** — BatchNorm vs LayerNorm: distributions, mean and
   variance before/after normalization.
@@ -34,7 +34,7 @@ Status legend: ✅ shipped · 🚧 planned
   the gradient-highway difference.
 - ✅ **Attention Lab** — self-attention step by step: Q, K, V, QKᵀ, scaling,
   softmax, weights, weighted sum; heatmap over a typed token sequence.
-- 🚧 **Multi-Head Attention** — per-head attention weight inspection.
+- ✅ **Multi-Head Attention** — per-head attention weight inspection.
 
 ## Beyond P2 (ideas, unscheduled)
 

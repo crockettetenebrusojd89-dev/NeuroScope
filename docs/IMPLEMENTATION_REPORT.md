@@ -2,6 +2,10 @@
 
 Date: 2026-09-30
 
+This is the historical v0.1.0 report. All five P2 modules were subsequently
+implemented on 2026-10-02; see [TAKEOVER_VALIDATION.md](TAKEOVER_VALIDATION.md)
+for current independent results.
+
 ## Implemented
 
 ### P0 (complete)
