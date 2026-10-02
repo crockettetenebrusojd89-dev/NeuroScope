@@ -40,8 +40,12 @@ NeuroScope is an independent project, not an official Stanford course tool.
 ## Quick Start
 
 Requires **Python 3.11–3.13** and a modern browser. Node.js is only needed for
-frontend validation. This repository has no remote configured yet: obtain the
-source ZIP or clone the repository URL chosen by its owner, then open its folder.
+frontend validation. Clone the repository and open its folder:
+
+```sh
+git clone https://github.com/crockettetenebrusojd89-dev/NeuroScope.git
+cd NeuroScope
+```
 
 ```sh
 python -m venv venv
@@ -164,7 +168,8 @@ translation parity, rendered-page regressions, and real HTTP smoke checks.
 See [release validation](docs/RELEASE_VALIDATION_v0.3.0.md) for exact measured
 results and [previous takeover validation](docs/TAKEOVER_VALIDATION.md) for history.
 GitHub Actions runs the same four checks on Linux (Python 3.11/3.12/3.13)
-and Windows (3.13). A remote Actions run is still pending publication.
+and Windows (3.13). See the [Actions runs](https://github.com/crockettetenebrusojd89-dev/NeuroScope/actions)
+for remote validation results.
 
 ## Scope and Limitations
 
@@ -195,8 +200,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before making a change.
 
 ## Publishing and License
 
-The project is prepared locally; no remote repository, tag, or GitHub Release
-has been created. The owner should follow [GitHub publishing](docs/GITHUB_PUBLISHING.md)
-when the destination is known.
+Source: [crockettetenebrusojd89-dev/NeuroScope](https://github.com/crockettetenebrusojd89-dev/NeuroScope).
+[GitHub publishing](docs/GITHUB_PUBLISHING.md) documents the release procedure.
+Website hosting remains a separate task; no Live Demo is deployed.
 
 [MIT](LICENSE) © 2026 NeuroScope contributors

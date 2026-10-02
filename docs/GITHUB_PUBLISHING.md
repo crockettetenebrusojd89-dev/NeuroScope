@@ -1,10 +1,12 @@
-# GitHub publishing — owner steps
+# GitHub publishing
 
 ## Current state
 
-The original working repository has **no remote configured**. No account or
-repository name has been guessed. All existing history is preserved; no push,
-public repository, tag, or GitHub Release has been created by this work.
+The owner confirmed the public destination on 2026-10-02:
+[NeuroScope](https://github.com/crockettetenebrusojd89-dev/NeuroScope).
+The repository was created empty; the original local history is preserved.
+The procedure below applies to initial publication and subsequent maintenance.
+Check GitHub Actions and Releases for the current remote status.
 
 ## Choose the target and publish the code
 
@@ -23,7 +25,7 @@ git remote -v
 4. Only when the destination is confirmed, replace the placeholder below:
 
 ```sh
-git remote add origin https://github.com/OWNER/REPOSITORY.git
+git remote add origin https://github.com/crockettetenebrusojd89-dev/NeuroScope.git
 git remote -v
 git ls-remote --heads origin
 git push -u origin main
@@ -35,8 +37,7 @@ that deliberately before pushing; do not overwrite them.
 
 5. Review the Actions checks on GitHub, including Linux and Windows jobs. Local
    passing checks and a valid workflow are not a successful remote Actions run.
-6. Set the repository description to "Interactive deep learning visualization
-   laboratory" and choose a few accurate topics such as `deep-learning`,
+6. Set the repository description to "An interactive deep learning visualization laboratory built with NumPy, FastAPI and vanilla JavaScript." and choose a few accurate topics such as `deep-learning`,
    `numpy`, `education`, `visualization`, `fastapi`. No fake popularity badges.
 7. Replace the temporary no-remote wording in README Quick Start/Publishing with
    the actual clone URL and repository state, in a small documentation commit.
@@ -58,6 +59,5 @@ git push origin v0.3.0
 - Attach only real assets as needed; GitHub automatically provides source archives.
 - Add a Live Demo link only after a deployed app is actually verified.
 
-These owner decisions remain because the destination account/repository and
-public hosting account are not specified. GIF recording is already completed;
-you do not need to record the three included demos manually.
+Website deployment is outside this publication task. GIF recording is already
+completed; the three included demos do not need to be recorded again.

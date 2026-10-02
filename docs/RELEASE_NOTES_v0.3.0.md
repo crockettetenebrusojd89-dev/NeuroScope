@@ -1,6 +1,6 @@
-# NeuroScope v0.3.0 — prepared release notes
+# NeuroScope v0.3.0
 
-**Status: local release preparation; no tag or GitHub Release published.**
+Release notes for the v0.3.0 publication.
 
 ## Highlights
 
@@ -46,7 +46,7 @@ for historical separation.
 - Original APIs have more limited validation than P2. Numerical safeguards in some
   legacy routes sanitize nonfinite results; P2 rejects them explicitly.
 - Language switching may reset page controls. There is no saved learning progress.
-- Hosting configuration is documented; no cloud deployment or remote CI run is claimed.
+- Hosting configuration is documented; no cloud deployment is provided.
 
 ## Installation
 

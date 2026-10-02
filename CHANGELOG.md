@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-## [0.3.0] - Unreleased (prepared)
+## [0.3.0] - 2026-10-02
 
 ### Added
 - Product README, six primary English screenshots, Chinese home, three authentic GIF demos with provenance/reproduction steps, and prepared publishing/deployment/release notes.
