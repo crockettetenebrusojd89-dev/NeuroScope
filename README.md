@@ -1,202 +1,197 @@
 # NeuroScope
 
-**An interactive deep learning visualization laboratory.**
+**Interactive deep learning visualization laboratory.**
 
-NeuroScope helps learners build real intuition for the core concepts of deep
-learning — tensors, activations, losses, backpropagation, optimization and
-convolution — by making every one of them *something you can touch*.
+Learn deep learning by seeing what the math is doing.
 
-The entire numerical engine is written in **plain NumPy** (no deep-learning
-frameworks), so every forward pass and every gradient can be read, printed
-and checked by hand.
+Change a tensor, train a small network, trace a gradient, or inspect attention
+weights. NeuroScope connects the formulas to real NumPy calculations in
+**18 interactive labs**, with **中文 / 中英双语 / English** interfaces.
 
-![python](https://img.shields.io/badge/python-3.11%2B-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
-![tests](https://img.shields.io/badge/tests-106%20passing-brightgreen)
-![i18n](https://img.shields.io/badge/i18n-%E4%B8%AD%E6%96%87%20%C2%B7%20%E4%B8%AD%E8%8B%B1%E5%8F%8C%E8%AF%AD%20%C2%B7%20English-orange)
-
-**界面语言 / UI languages: 中文（默认）· 中英双语 · English**
-
----
+![NeuroScope Learning Path — real English UI](docs/screenshots/home-en.jpg)
 
 ## Features
 
-### Fundamentals
-- **Tensor & Shape Lab** — reshape, transpose, matmul, broadcasting and axis
-  reductions with live before/after shapes.
-- **Activations Lab** — ReLU, Sigmoid, Tanh, Leaky ReLU, GELU, Softmax: curves,
-  derivatives, and live `f(x)` / `f′(x)` readouts.
-- **Loss Lab** — MSE, Binary Cross Entropy, Cross Entropy: drag the prediction,
-  watch the loss and its gradient respond.
-- **Computational Graph** — step through a forward pass, then a backward pass;
-  local gradients on every edge make the chain rule explicit.
+- **Find a starting point.** A Learning Path home with three recommended routes,
+  short explanations, difficulty labels, and links to every existing lab.
+- **Follow the math.** Editable inputs, forward/backward values, layer gradients,
+  optimizer paths, convolution windows, and attention matrices.
+- **Learn by experimenting.** Train a small MLP on 2D data, compare initialization
+  and regularization, or change the dimensions a normalization method uses.
+- **Read the implementation.** A NumPy educational engine with numerical tests;
+  no model downloads, GPU, frontend build step, account, or database required.
+- **Switch languages instantly.** Chinese by default; bilingual mode adds English
+  page titles; the sidebar choice persists after refresh.
 
-### Networks
-- **Neural Network Playground** — XOR / Moons / Circles / Spiral / Blobs with
-  adjustable size, noise and train/test split. Build `Input → Hidden → Output`
-  with configurable layer count, neurons and activation.
-- **Training Playground** — live training/validation loss, accuracy and
-  decision boundary with **Start / Pause / Resume / Reset**.
-- **Backpropagation Visualizer** — loss → output gradient → per-layer `dW`/`db`,
-  summary first (norms, histograms) with drill-down into small matrices.
-- **Gradient Diagnostics** — per-layer gradient norms with vanishing /
-  exploding detection.
+## Learning Path
 
-### Training dynamics
-- **Optimization Lab** — SGD, Momentum, RMSProp and Adam racing across 2D loss
-  landscapes (elongated bowl, Rosenbrock, saddle) with tunable hyperparameters.
-- **Initialization Lab** — Zeros vs Random vs Xavier vs He through a 10-layer
-  network: activation variance and gradient norms per layer.
-- **Learning Rate Lab** — too small / appropriate / too large learning rates
-  side by side.
-- **Regularization Lab** — None vs L1 vs L2 vs Dropout: train/val accuracy and
-  decision-boundary complexity.
+| Route | Existing labs, in recommended order |
+|---|---|
+| **A · Deep Learning Foundations** | Tensor → Activations → Loss → Graph → Backprop → Optimization |
+| **B · Computer Vision Foundations** | Tensor → Backprop → Convolution → Pooling → Receptive Field → Residual → Normalization |
+| **C · Attention Foundations** | Tensor → Activations / softmax → Loss → Normalization → Self-Attention → Multi-Head Attention |
 
-### Convolution
-- **Convolution Lab** — sliding-window animation: kernel, element-wise
-  products, summation, feature map; kernel size/stride/padding with live
-  output-shape formula.
-- **Pooling Lab** — max and average pooling, window by window.
-
-## Screenshots
-
-Captured from real runs (Chinese UI shown; English and bilingual modes available).
-
-| Network Playground (神经网络实验场) | Computational Graph (计算图) | Optimization Lab (优化器实验室) |
-|---|---|---|
-| ![Playground](docs/screenshots/playground-zh.png) | ![Graph](docs/screenshots/graph-zh.png) | ![Optimizers](docs/screenshots/optimizers-zh.png) |
-
-P2 example (captured from a real bilingual run):
-
-![Multi-Head Attention](docs/screenshots/multihead-bi.jpg)
-
-## Internationalization
-
-The whole UI ships in three language modes, switchable instantly from the
-sidebar and persisted across sessions:
-
-- **中文** (default) — natural Chinese UI with「中文（English）」terminology
-- **中英双语** — main titles in both languages, uncluttered body text
-- **English**
-
-Implementation: a central i18n module (`app/static/js/i18n.js`) with locale
-resources (`locales/zh-CN.js`, `locales/en-US.js`, 298 keys each). Even the
-Tensor Lab's explanations and error messages are localized end-to-end: the
-backend returns structured i18n keys + params, rendered client-side.
-
-## Installation
-
-Requires **Python 3.11+** and a browser. Nothing else.
-
-```bash
-git clone https://github.com/<your-org>/neuroscope.git
-cd neuroscope
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # macOS / Linux
-pip install -r requirements.txt
-```
+The complete concept path adds initialization and regularization before CNNs.
+Playground, Gradient Diagnostics, and Learning Rate are companion experiments.
+See [Learning Path](docs/LEARNING_PATH.md) for the order and
+[CS231n topic mapping](docs/CS231N_MAPPING.md) for official reading links.
+NeuroScope is an independent project, not an official Stanford course tool.
 
 ## Quick Start
 
-### Windows (one click)
+Requires **Python 3.11–3.13** and a modern browser. Node.js is only needed for
+frontend validation. This repository has no remote configured yet: obtain the
+source ZIP or clone the repository URL chosen by its owner, then open its folder.
 
-Double-click **`start.bat`**. It creates/uses the project-local `venv`,
-installs dependencies, starts the server and opens your browser.
-
-### Any platform
-
-```bash
-uvicorn app.main:app --host 127.0.0.1 --port 8000
-# then open http://127.0.0.1:8000
+```sh
+python -m venv venv
 ```
 
-### Run the tests
+Activate the environment:
 
-```bash
-pytest -q
-node tests/validate_frontend.mjs   # JS syntax, locale parity, routing regression
-python tests/live_smoke.py       # real HTTP checks; start the app first
+```powershell
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
 ```
 
-106 tests, including **numerical gradient checking** for every backward pass
-and hand-computed convolution/pooling references.
+```sh
+# macOS / Linux
+source venv/bin/activate
+```
+
+Then install and run:
+
+```sh
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+```
+
+Open **http://127.0.0.1:8000/**, select a route, and click **Start Learning**.
+On Windows, `start.bat` also creates/uses the local environment, installs the
+requirements, and opens the app. If port 8000 is already in use, stop your old
+NeuroScope server or use another port. Stop the server with Ctrl+C.
+
+## Demo
+
+These recordings show actual page calculations, not mock data or model benchmarks.
+Training speed and results depend on the experiment parameters and machine.
+
+![Real decision boundary training](docs/demos/decision-boundary.gif)
+
+| Optimizer comparison | Attention inspection |
+|---|---|
+| ![Real optimizer runs](docs/demos/optimizer-comparison.gif) | ![Real attention inspection](docs/demos/attention-visualization.gif) |
+
+The optimizer recording compares real runs at increasing step counts. The
+attention recording changes the selected query and the untrained projection
+seed. [Recording notes and reproduction steps](docs/DEMO_RECORDING.md) describe
+both; neither recording implies capabilities beyond the visible controls.
+
+**Live Demo:** not deployed yet. [Deployment guide](docs/DEPLOYMENT.md) describes
+native Python hosting; a static-only host cannot run the numerical API.
+
+## Screenshots
+
+Captured from a running app at a common 1440 × 1100 browser viewport, English UI.
+The Learning Path hero above is the sixth primary screenshot.
+
+| Network Playground | Backpropagation |
+|---|---|
+| ![Playground](docs/screenshots/playground-en.jpg) | ![Backprop](docs/screenshots/backprop-en.jpg) |
+
+| Convolution | Self-Attention |
+|---|---|
+| ![Convolution](docs/screenshots/cnn-en.jpg) | ![Self-Attention](docs/screenshots/attention-en.jpg) |
+
+![Multi-Head Attention: independent maps, concat, and output projection](docs/screenshots/multihead-en.jpg)
+
+[Chinese home](docs/screenshots/home-zh.jpg) and the earlier
+[Chinese Playground](docs/screenshots/playground-zh.png),
+[Graph](docs/screenshots/graph-zh.png), [Optimization](docs/screenshots/optimizers-zh.png),
+and [bilingual Multi-Head Attention](docs/screenshots/multihead-bi.jpg) are also retained.
 
 ## Architecture
 
-```
-neuroscope/                 # NumPy engine — no UI code here
-  core/
-    activations.py          # ReLU/Sigmoid/Tanh/LeakyReLU/GELU/Softmax + grads
-    initializers.py         # zeros / random / xavier / he
-    network.py              # MLP: forward, backward, dropout, L1/L2
-    graph.py                # tiny computational-graph engine
-    tensor_ops.py           # reshape/transpose/matmul/broadcast/axis ops
-  layers/linear.py          # Linear layer: forward / backward
-  losses/losses.py          # MSE, BCE, Cross Entropy (fused, stable)
-  optimizers/optimizers.py  # SGD, Momentum, RMSProp, Adam
-  datasets/datasets.py      # XOR, moons, circles, spiral, blobs
-  diagnostics/gradients.py  # gradient reports, health, init-lab runs
-  cnn/conv.py               # conv2d / pool2d with explicit loops
-app/
-  main.py                   # FastAPI entry (serves API + static UI)
-  api/routes.py             # thin JSON layer over the engine
-  static/                   # dependency-free vanilla-JS SPA
-    js/pages/               # one module per lab
-tests/                      # pytest, incl. numerical gradient checking
-docs/                       # ARCHITECTURE / MATH_NOTES / ROADMAP / report
-examples/                   # runnable scripts using the engine directly
+```text
+NumPy educational engine → FastAPI JSON API → Vanilla JavaScript visualization
+neuroscope/                app/api/             app/static/
 ```
 
-Design rules:
+The engine keeps forward passes, backward passes, gradients, and optimizer
+updates readable and testable. This is a teaching choice: frameworks such as
+PyTorch serve different needs, including automatic differentiation and larger
+training workloads. NeuroScope exposes the small calculations learners are
+trying to understand.
 
-1. **UI and core are strictly separated** — the engine never imports the app.
-2. **Math must be readable** — formulas live in docstrings, loops are explicit.
-3. **No fabricated results** — everything the UI shows comes from a real run.
+- `neuroscope/core/`: tensors, activations, MLP, graph, normalization, residuals, attention.
+- `neuroscope/layers/`, `losses/`, `optimizers/`: explicit mathematical components.
+- `neuroscope/cnn/`: convolution, pooling, receptive-field geometry.
+- `app/main.py`: one FastAPI service for JSON and static assets.
+- `app/static/js/pages/`: lazy-loaded labs and home; no frontend framework.
+- `app/static/js/i18n.js` and `locales/`: shared translation resources.
 
-## Learning modules
+[Architecture](docs/ARCHITECTURE.md) · [Math notes](docs/MATH_NOTES.md)
 
-| Module | Concept | Interaction |
+## Supported Labs
+
+| Area | Labs | Main interaction |
 |---|---|---|
-| Tensor & Shape Lab | shapes, broadcasting, axes | edit tensors, apply ops |
-| Activations Lab | nonlinearity, derivatives | slider over x, live f(x)/f′(x) |
-| Loss Lab | loss surfaces | drag prediction |
-| Computational Graph | chain rule | step forward/backward |
-| Playground | representation learning | build & train an MLP live |
-| Backprop Visualizer | gradient flow | per-layer drill-down |
-| Optimization Lab | optimizer dynamics | race optimizers on landscapes |
-| Initialization Lab | variance flow | compare 4 initializers |
-| Learning Rate Lab | step size | compare loss curves |
-| Regularization Lab | overfitting | compare boundaries |
-| Convolution Lab | feature extraction | animate the sliding window |
-| Pooling Lab | downsampling | animate max/avg windows |
-| Gradient Diagnostics | gradient health | inspect per-layer norms |
+| Fundamentals | Tensor & Shape, Activations, Loss, Computational Graph | Edit values, move sliders, trace the chain rule |
+| Networks | Playground, Backpropagation, Gradient Diagnostics | Build/train an MLP; inspect layer gradients |
+| Training | Initialization, Optimization, Learning Rate, Regularization | Compare signal scales, updates, and generalization |
+| CNN | Convolution, Pooling, Receptive Field | Move windows; compute shapes and exact dependencies |
+| Modern DL | Residual Connection, Normalization, Self-Attention, Multi-Head Attention | Compare real forward/backward branches; inspect axes and attention matrices |
+
+## Testing
+
+With the virtual environment active:
+
+```sh
+python -m pytest -q
+node tests/validate_frontend.mjs
+# Keep the server running in another terminal:
+python tests/live_smoke.py
+```
+
+The release-preparation baseline had **106 passing Python tests**. The current
+suite includes an additional padded-window regression, frontend routing,
+translation parity, rendered-page regressions, and real HTTP smoke checks.
+See [release validation](docs/RELEASE_VALIDATION_v0.3.0.md) for exact measured
+results and [previous takeover validation](docs/TAKEOVER_VALIDATION.md) for history.
+The local validation commands also check frontend behavior and live HTTP.
+A remote GitHub Actions run is still pending publication.
+
+## Scope and Limitations
+
+- BatchNorm teaches a **2D current batch** `X[N,D]`, with population variance and
+  scalar γ/β. It has no running statistics or train/eval switch.
+- Residual Lab is a **controlled gradient experiment** with shared seeded weights
+  and a fixed objective, not an accuracy benchmark or a trained ResNet.
+- Attention uses user-supplied numeric embeddings and **untrained projections**.
+  Token text labels rows; there is no tokenizer, positional encoding, or causal mask.
+- There is **no complete Transformer or production model training framework**.
+- Playground sessions live in server memory and disappear on restart. Use a
+  single worker. This demo has no account system or production multi-user isolation.
+- Language changes re-render a lab and may reset its controls. Most original
+  labs have more limited input validation than the P2 endpoints.
 
 ## Roadmap
 
-All five P2 labs are implemented, in addition to the 13 existing pages:
-
-| Lab | Real calculation and interaction |
-|---|---|
-| Normalization | training-batch BatchNorm/LayerNorm on X[N,D]; editable ε/γ/β; group/axis highlighting, means, population variances, distributions |
-| Receptive Field | per-layer kernels/strides/padding; map size, jump, RF; exact sparse input dependencies including intermediate padding |
-| Residual Connection | shared seeded weights; plain vs residual tanh forward/backward; identity-path gradients and per-depth norms |
-| Self-Attention | editable numeric embeddings; Q/K/V projections, scores, √d_k scaling, softmax, fixed-scale true heatmaps, token contributions |
-| Multi-Head Attention | independent per-head projections/maps, concat, Wo projection; d_model/head divisibility and shape validation |
-
-These are teaching experiments: BatchNorm uses current-batch statistics and
-scalar γ/β; residual comparison uses a fixed linear probe without training;
-attention uses supplied embeddings and seeded untrained projections, without
-positional encodings or masking. Token text labels numerical input rows.
-See [docs/MATH_NOTES.md](docs/MATH_NOTES.md) for formulas and
-[docs/TAKEOVER_VALIDATION.md](docs/TAKEOVER_VALIDATION.md) for independent
-validation and limitations. [docs/ROADMAP.md](docs/ROADMAP.md) tracks future work.
+**Feature Freeze:** v0.3.x focuses on bugs, accessibility, performance,
+documentation, and learning UX. Whether v0.4 adds knowledge modules is undecided.
+[Roadmap](docs/ROADMAP.md) · [v0.3.0 release notes](docs/RELEASE_NOTES_v0.3.0.md)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). The short version: NumPy-only engine,
-numerical gradient checks for every backward pass, no fabricated results.
+Small, focused fixes and learning-experience improvements are welcome.
+Math results must be real; backward changes need numerical gradient checks;
+all UI text belongs in the existing locale dictionaries.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before making a change.
 
-## License
+## Publishing and License
+
+The project is prepared locally; no remote repository, tag, or GitHub Release
+has been created. The owner should follow [GitHub publishing](docs/GITHUB_PUBLISHING.md)
+when the destination is known.
 
 [MIT](LICENSE) © 2026 NeuroScope contributors
