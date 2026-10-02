@@ -3,6 +3,7 @@
 
 export default {
   app: {
+    browseLabs: 'Browse labs & language',
     sub: 'DL visualization lab',
     footer: 'NumPy engine',
     loadFailed: 'Failed to load page: {msg}',

@@ -35,6 +35,7 @@ function renderNav() {
       <button data-mode="bi">中英双语</button>
       <button data-mode="en">English</button>
     </div>`;
+  document.getElementById('nav-toggle').textContent = t('app.browseLabs');
   document.getElementById('brand-sub').textContent = t('app.sub');
   document.getElementById('sidebar-footer').textContent = `v0.2.0 · ${t('app.footer')}`;
   markActive();
@@ -87,9 +88,18 @@ async function showPage(key) {
   }
 }
 
+document.getElementById('nav-toggle').addEventListener('click', () => {
+  const expanded = document.getElementById('sidebar').classList.toggle('nav-open');
+  document.getElementById('nav-toggle').setAttribute('aria-expanded', String(expanded));
+});
+
 document.getElementById('nav').addEventListener('click', e => {
   const item = e.target.closest('.nav-item');
-  if (item) { location.hash = item.dataset.page; return; }
+  if (item) {
+    document.getElementById('sidebar').classList.remove('nav-open');
+    document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+    location.hash = item.dataset.page; return;
+  }
   const langBtn = e.target.closest('#lang-switch button');
   if (langBtn) setMode(langBtn.dataset.mode);
 });

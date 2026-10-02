@@ -4,6 +4,7 @@
 
 export default {
   app: {
+    browseLabs: '实验室导航与语言',
     sub: '深度学习可视化实验室',
     footer: 'NumPy 引擎',
     loadFailed: '页面加载失败：{msg}',

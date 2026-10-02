@@ -16,8 +16,8 @@ for(const k of Object.keys(zh)) assert.deepEqual([...zh[k].matchAll(/\{(\w+)\}/g
 for (const f of js) {
   for (const m of readFileSync(f,'utf8').matchAll(/\bt\(\s*['"]([\w.]+)['"]/g)) assert.ok(m[1] in zh, `Missing locale key: ${m[1]}`);
 }
-class Element { constructor(){this.children=[];this.dataset={};this.classList={toggle(){}};} replaceChildren(...cs){this.children=cs;} addEventListener(){} }
-const els = Object.fromEntries(['nav','brand-sub','sidebar-footer','page-title','page-desc','page-content'].map(k=>[k,new Element()]));
+class Element { constructor(){this.children=[];this.dataset={};this.classList={toggle(){},remove(){}};} replaceChildren(...cs){this.children=cs;} addEventListener(){} }
+const els = Object.fromEntries(['sidebar','nav-toggle','nav','brand-sub','sidebar-footer','page-title','page-desc','page-content'].map(k=>[k,new Element()]));
 let release; const delayed = new Promise(r=>{release=r;}); let oldRoot, newRoot, disposed=0;
 const ctx = vm.createContext({document:{getElementById:k=>els[k],querySelectorAll:()=>[],createElement:()=>new Element(),documentElement:{}},window:{addEventListener(){},scrollTo(){}},location:{hash:'#tensor'},console,t:k=>zh[k]??k,raw:k=>({zh:zh[k],en:en[k]}),getMode:()=> 'zh',setMode(){},onLanguageChange(){},loadModule:async mod=>mod==='tensor'?delayed:{render:async root=>{newRoot=root;return ()=>disposed++;}}});
 let shell = readFileSync(resolve(base,'app/static/js/app.js'),'utf8').replace(/^import .*;$/m,'').replace('await import(`./pages/${mod}.js`)','await loadModule(mod)');
