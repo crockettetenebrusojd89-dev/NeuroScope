@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and validation tests; no nonfinite result clamping in P2 APIs.
 
 ### Fixed
+- CNN animation now displays and multiplies the actual zero-padded input, matching feature-map values at every window. Stop animation on navigation; API and rendered-JS regressions added.
 - Keep wide lab matrices scrollable within their panels instead of overflowing
   the entire page. Verified all five P2 pages at desktop and mobile widths.
 - Correct CE Loss Lab slider gradient: z0=4p−2 requires dL/dp=4*dL/dz0.

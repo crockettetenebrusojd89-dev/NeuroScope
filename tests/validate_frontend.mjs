@@ -48,4 +48,17 @@ for(const [id,labs] of Object.entries(paths)) {
   for(const lab of labs) assert.ok(steps.some(step=>step[0]===lab),`Unknown recommended link: ${lab}`);
   for(const field of ['title','desc','hint']) assert.ok(`home.paths.${id}.${field}` in zh);
 }
-console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links, 3 valid recommended routes`);
+// Execute the actual animation renderer with a known padded identity-kernel fixture.
+// Original bug read unpadded values: output[0,4]=0.4, displayed sum=0.
+const cnnSource = readFileSync(resolve(base,'app/static/js/pages/cnn.js'),'utf8').replace(/^import .*;$/gm,'').replace('export async function render','async function render');
+const cnnEls = Object.fromEntries(['c-preset','c-stride','c-padding','c-error','c-sv','c-pv','c-shape','c-formula','c-in','c-k','c-out','c-detail','c-run','c-play'].map(id=>[id,{value:id==='c-padding'?'1':'1'}]));
+const image = [[0,0.4],[0,1]], padded = [[0,0,0,0],[0,0,0.4,0],[0,0,1,0],[0,0,0,0]];
+let tick, cancelled=false, drawnInput;
+const cnnContext=vm.createContext({api:async()=>({input:image,padded_input:padded,kernel:[[0,0,0],[0,1,0],[0,0,0]],input_shape:[2,2],output_shape:[2,2],windows:[[0,0],[0,1],[1,0],[1,1]],output:[[0,0.4],[0,1]]}),heatmap:(el,values)=>{if(el===cnnEls['c-in'])drawnInput=values;},t:(key,args)=>key==='cnn.sum'?'SUM=':key==='cnn.products'?args.products:key,errText:String,setInterval:fn=>{tick=fn;return 1;},clearInterval:()=>{cancelled=true;}});
+vm.runInContext(cnnSource+'\nglobalThis.renderCNN=render;',cnnContext);
+const disposeCNN=await cnnContext.renderCNN({querySelector:id=>cnnEls[id.slice(1)]});
+cnnEls['c-play'].onclick(); tick(); tick();
+assert.ok(cnnEls['c-detail'].innerHTML.includes('SUM=<b>0.400</b>'),'animated window must match padded output');
+assert.deepEqual(drawnInput,padded,'input visualization includes real zero padding');
+disposeCNN(); assert.equal(cancelled,true,'leaving CNN stops animation');
+console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links, 3 valid recommended routes; CNN animation: 3 regressions passed`);

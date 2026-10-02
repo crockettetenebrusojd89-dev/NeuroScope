@@ -59,7 +59,7 @@ export async function render(root) {
     if (!data) return;
     const win = highlightIdx >= 0 ? data.windows[highlightIdx] : null;
     const k = data.kernel.length;
-    heatmap($('#c-in'), data.input, {
+    heatmap($('#c-in'), data.padded_input, {
       height: 280, showValues: true,
       highlight: win ? [win[0], win[1], k] : null,
     });
@@ -68,7 +68,7 @@ export async function render(root) {
     heatmap($('#c-out'), outSoFar, { height: 280, showValues: true, highlight: null });
     if (win) {
       const [r, c] = win;
-      const region = data.input.slice(r, r + k).map(row => row.slice(c, c + k));
+      const region = data.padded_input.slice(r, r + k).map(row => row.slice(c, c + k));
       const products = region.map((row, i) => row.map((v, j) => v * data.kernel[i][j]));
       const sum = products.flat().reduce((a, b) => a + b, 0);
       const OW = data.output_shape[1];
@@ -104,4 +104,5 @@ export async function render(root) {
   $('#c-run').onclick = compute;
   $('#c-play').onclick = play;
   await compute();
+  return stop;
 }

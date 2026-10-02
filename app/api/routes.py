@@ -440,6 +440,7 @@ def cnn_conv(payload: dict = Body(default={})):
     return _clean(
         {
             "input": image,
+            "padded_input": np.pad(image, padding, mode="constant") if padding > 0 else image,
             "kernel": kernel,
             "output": np.round(out, 4),
             "windows": windows,

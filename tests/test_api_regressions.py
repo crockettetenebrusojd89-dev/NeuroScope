@@ -19,3 +19,19 @@ def test_scalar_relu_api_regression():
 def test_null_pool_stride_api_regression():
     r=cnn_pool({'image':[[1,2],[3,4]],'size':2,'stride':None})
     assert r['output']==[[4.0]]
+
+
+def test_cnn_animation_windows_use_padded_values():
+    from app.api.routes import cnn_conv
+    import numpy as np
+    for padding in (0, 1, 2):
+        for stride in (1, 2, 3):
+            result = cnn_conv({"preset": "identity", "padding": padding, "stride": stride})
+            image = np.asarray(result["input"])
+            padded = np.asarray(result["padded_input"])
+            np.testing.assert_array_equal(padded, np.pad(image, padding))
+            kernel = np.asarray(result["kernel"])
+            output = np.asarray(result["output"])
+            for index, (row, col) in enumerate(result["windows"]):
+                window = padded[row:row+3, col:col+3]
+                assert np.sum(window * kernel) == output.flat[index]
