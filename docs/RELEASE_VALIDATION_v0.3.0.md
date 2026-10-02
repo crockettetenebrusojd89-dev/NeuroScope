@@ -99,9 +99,11 @@ Existing history was neither squashed nor overwritten.
 | `5823cea` | Mobile first-visit navigation UX |
 | `76e0c0a` | Product README, authentic assets, release/publishing/deployment guides |
 | `3ed32a5` | v0.3.0 metadata, local/CI validation alignment, ignore/contributing rules |
+| `e5bfbe3` | Completed measured release-preparation validation record |
 
-This report is committed in a final documentation-only commit; see Git history
-for its hash, avoiding a self-referential commit hash in the document.
+The closing asset-review commit refreshes both homepage captures to include
+the top-of-page explanation and Start Learning. See Git history for that hash,
+avoiding a self-referential commit hash in the document.
 
 ## Screenshots and demos
 
