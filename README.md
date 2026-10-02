@@ -12,7 +12,7 @@ and checked by hand.
 
 ![python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
-![tests](https://img.shields.io/badge/tests-45%20passing-brightgreen)
+![tests](https://img.shields.io/badge/tests-56%20passing-brightgreen)
 ![i18n](https://img.shields.io/badge/i18n-%E4%B8%AD%E6%96%87%20%C2%B7%20%E4%B8%AD%E8%8B%B1%E5%8F%8C%E8%AF%AD%20%C2%B7%20English-orange)
 
 **界面语言 / UI languages: 中文（默认）· 中英双语 · English**
@@ -76,7 +76,7 @@ sidebar and persisted across sessions:
 - **English**
 
 Implementation: a central i18n module (`app/static/js/i18n.js`) with locale
-resources (`locales/zh-CN.js`, `locales/en-US.js`, 240 keys each). Even the
+resources (`locales/zh-CN.js`, `locales/en-US.js`, 256 keys each). Even the
 Tensor Lab's explanations and error messages are localized end-to-end: the
 backend returns structured i18n keys + params, rendered client-side.
 
@@ -114,7 +114,7 @@ pytest -q
 node tests/validate_frontend.mjs   # JS syntax, locale parity, routing regression
 ```
 
-45 tests, including **numerical gradient checking** for every backward pass
+56 tests, including **numerical gradient checking** for every backward pass
 and hand-computed convolution/pooling references.
 
 ## Architecture
@@ -170,7 +170,9 @@ Design rules:
 
 **Normalization Lab is implemented** (training-batch BatchNorm / LayerNorm for
 `X[N,D]`, editable ε/γ/β, group highlighting, population statistics and histograms).
-The remaining P2 modules are planned — see
+**Receptive Field Lab is implemented**: per-layer kernel/stride/padding,
+feature-map sizes, effective stride, theoretical bounds and exact sparse
+input support. Residual and attention modules remain planned — see
 [docs/ROADMAP.md](docs/ROADMAP.md): Normalization Lab (BatchNorm/LayerNorm),
 Receptive Field Lab, Residual Connection Lab, Attention & Multi-Head
 Attention visualizations.

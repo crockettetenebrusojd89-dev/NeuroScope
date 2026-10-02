@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Receptive Field Lab: configurable square CNN layers, real size/jump/RF
+  calculations, feature selection and exact input support (including stride
+  holes and padding at intermediate layers); 11 tests added.
 - Normalization Lab: real NumPy training-batch BatchNorm/LayerNorm on X[N,D],
   axis/group highlighting, editable epsilon/gamma/beta, before/after group
   mean/variance and shared-bin histograms; fully localized. 16 new numerical

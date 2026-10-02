@@ -110,3 +110,13 @@ Population variance (ddof=0): μ=mean(x), σ²=mean((x−μ)²).
 mean is β and variance is `γ²σ²/(σ²+ε)`, including zero for constant groups.
 This lab uses current-batch statistics and scalar γ/β; inference running
 statistics and convolutional BatchNorm are outside its scope.
+
+## 9. Receptive field
+
+Starting with n=input_size, j=1, r=1, offset=0:
+`n′=floor((n+2p−k)/s)+1`, `j′=j*s`, `r′=r+(k−1)*j`,
+`offset′=offset−p*j`. A feature at q has theoretical half-open support
+`[offset+q*j, offset+q*j+r)`. Exact input dependencies walk each kernel
+backwards and discard out-of-bounds intermediate coordinates at each layer.
+For k=1,s=3 followed by k=2,s=1, the 4-wide box has only two indices
+per axis; highlighting the entire rectangle would be mathematically wrong.

@@ -9,6 +9,7 @@ export default {
     loadFailed: '页面加载失败：{msg}',
   },
   nav: {
+    receptive: "感受野",
     normalization: "归一化",
     fundamentals: '基础知识',
     networks: '神经网络',
@@ -49,6 +50,7 @@ export default {
     pressAnimate: '点击「播放窗口动画」查看逐步过程。',
   },
   pages: {
+    receptive: {"title": "感受野实验室", "desc": "配置卷积网络，选择任意深层特征，追踪其在输入上的精确依赖区域（Receptive Field）。"},
     normalization: {"title": "归一化实验室", "desc": "对比批归一化（BatchNorm）与层归一化（LayerNorm）的计算维度、数值、统计量与分布。"},
     tensor: {
       title: '张量与形状实验室',
@@ -322,4 +324,5 @@ export default {
   },
   p2: {"before": "操作前", "after": "操作后", "err": {"json": "请输入合法的 JSON。", "matrix": "{field}：请输入非空矩形二维矩阵（最多 1024 个元素）。", "finite": "{field}：数值必须有限且在支持范围内。", "config": "参数无效或超出范围：{field}。"}},
   normalization: {"values": "X [N, D] (JSON)", "kind": "方法", "epsilon": "ε", "gamma": "γ", "beta": "β", "scope": "使用当前批次统计量，ddof=0；γ/β 为标量，不包含运行统计量。常量组的方差为 0，ε 保证除法有限。", "batchAxis": "BatchNorm：沿 axis=0（N ↓）计算。每列特征为一组，样本共享该列的 μ/σ²。", "layerAxis": "LayerNorm：沿 axis=1（D →）计算。每行样本为一组，特征共享该行的 μ/σ²。", "group": "高亮归一化组", "feature": "特征 D={i}", "sample": "样本 N={i}", "stats": "各组统计量（总体方差）", "beforeHist": "操作前：所选组的分布（计数）", "afterHist": "操作后：所选组的分布（相同分箱）"},
+  rf: {"inputSize": "输入尺寸", "depth": "层数", "kernel": "卷积核尺寸", "stride": "步长（Stride）", "padding": "填充（Padding）", "layer": "第 {i} 层", "mapSize": "特征图尺寸", "note": "使用方形卷积核、对称零填充，无空洞卷积。网格用于选择特征坐标，不代表激活值。", "feature": "选择特征坐标", "selectLayer": "查看层", "input": "精确输入依赖区域", "support": "第 {layer} 层特征 [{row},{col}] 依赖 {count} 个真实输入像素。", "boundsNote": "半开区间的理论边界可能延伸到填充区。橙色仅标记真实依赖像素；步长可能使边界框内出现空洞。"},
 };

@@ -43,3 +43,13 @@ BatchNorm column highlighting counted 4 cells; LayerNorm row highlighting 2.
 Hand reference X=[[1,3],[10,14]], ε=.01, γ=2, β=3 gave means 3 and
 variances 3.960396/3.990025. Invalid JSON and epsilon=0 show localized errors.
 All three modes persist after reload; zero console errors.
+
+### P2-2 Receptive Field — completed
+
+Full pytest **56 passed in 0.66s**; **22 JS files**, **256 locale keys**
+and routing regression passed. Real browser tested input size, layer count,
+all kernel/stride/padding controls on three layers, Compute, layer selector,
+interior and boundary feature clicks. X=12, k1=1/s1=3/p1=0, k2=2/s2=1/p2=0
+with feature [1,1] showed box [3,3,7,7) and exactly **4 highlighted pixels**.
+All three modes rendered with zero error boxes and no console errors.
+Browser QA found and corrected depth-field synchronization before commit.

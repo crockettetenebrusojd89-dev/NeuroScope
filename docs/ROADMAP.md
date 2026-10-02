@@ -28,7 +28,7 @@ Status legend: ✅ shipped · 🚧 planned
 
 - ✅ **Normalization Lab** — BatchNorm vs LayerNorm: distributions, mean and
   variance before/after normalization.
-- 🚧 **Receptive Field Lab** — click a deep feature, highlight its receptive
+- ✅ **Receptive Field Lab** — click a deep feature, highlight its receptive
   field on the input image as CNN depth grows.
 - 🚧 **Residual Connection Lab** — plain vs residual network: `F(x) + x` and
   the gradient-highway difference.
