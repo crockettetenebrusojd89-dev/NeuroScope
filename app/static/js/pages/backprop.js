@@ -40,12 +40,12 @@ export async function render(root) {
 
   function renderResult(r) {
     const container = $('#b-result');
-    const chain = ['Loss', ...r.layers.map((_, i) => `L${r.layers.length - 1 - i}`).reverse(), 'Input'];
+    const chain = ['Loss', ...r.layers.map((_, i) => `L${r.layers.length - 1 - i}`), 'Input'];
     container.innerHTML = `
       <div class="panel">
         <h3>${t('backprop.flowTitle', { loss: r.loss.toFixed(5) })}</h3>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px">
-          ${chain.map(c => `<span class="shape-badge">${c}</span>`).join('<span style="color:var(--text-dim)">←</span>')}
+          ${chain.map(c => `<span class="shape-badge">${c}</span>`).join('<span style="color:var(--text-dim)">→</span>')}
         </div>
       </div>
       <div class="panel"><h3>${t('backprop.normsTitle')}</h3>
