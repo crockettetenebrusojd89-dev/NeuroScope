@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- CS231n topic companions with official reading links, plus documented learning order; no copied course material or guessed lecture numbers.
 - Three selectable recommended routes: deep learning, computer vision and attention foundations, using existing labs only.
 - Default Learning Path home: 15 ordered concept links with descriptions, difficulty and topics; three companion labs; accessible sidebar links and Start Learning.
 - Multi-Head Attention Lab: independent per-head Q/K/V projections and maps,

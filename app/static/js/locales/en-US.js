@@ -336,6 +336,23 @@ export default {
   attention: {"tokens": "Token labels (space separated)", "dk": "d_k = d_v", "seed": "Projection seed", "note": "Supply numeric embeddings X; token text labels rows only. Seeded projections are untrained, without positional encodings or a causal mask. This is a math lab, not a pretrained language model.", "query": "Select query token", "raw": "Raw scores", "scaled": "Scaled scores", "weights": "Attention weights", "legend": "Fixed color scale: blue=0, orange=1. Rows are queries, columns are keys; highlighted row is the selected query.", "contributions": "Contributions for {token}", "sum": "Sum the contribution rows to obtain this query output.", "output": "Attention output", "err": {"tokens": "Provide one nonempty token label per input row (at most 32 characters each)."}},
   multihead: {"heads": "Head count", "head": "Head {i}", "inspect": "Inspect head", "note": "d_model is the input width and must be divisible by heads. Each head has independent Wq/Wk/Wv; d_head=d_model/heads. Wo is a separate output projection.", "concat": "Concatenated heads", "projected": "Projected output", "projections": "Independent projections", "headOutput": "Head output", "err": {"divisible": "d_model must be divisible by the head count (heads <= d_model)."}},
   home: {
+  "related": "Related: {topic}",
+  "courseTitle": "Studying alongside CS231n?",
+  "courseNote": "The topic labels connect these labs to course ideas. This independent project supplements course reading; it is not an official course tool.",
+  "courseSchedule": "Official topic schedule",
+  "courseReading": "Official course notes",
+  "courseTopics": {
+    "numpy": "NumPy arrays",
+    "networks": "Neural networks",
+    "classifiers": "Linear classifiers / softmax loss",
+    "backprop": "Backpropagation",
+    "training": "Training neural networks",
+    "optimization": "Optimization / regularization",
+    "cnn": "Convolutional networks",
+    "architectures": "CNN architectures",
+    "attention": "Self-attention"
+  }
+,
   "recommended": "Choose your learning route",
   "choose": "Start with the basics, or follow the topics you need today.",
   "paths": {

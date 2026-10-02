@@ -337,6 +337,23 @@ export default {
   attention: {"tokens": "Token 标签（空格分隔）", "dk": "d_k = d_v", "seed": "投影随机种子", "note": "请提供数值嵌入 X；文本仅标记矩阵行。投影按种子随机生成、未经训练，不含位置编码或因果掩码。本页用于数学实验，不代表预训练语言模型。", "query": "选择查询 token", "raw": "原始分数", "scaled": "缩放后分数", "weights": "注意力权重", "legend": "固定色标：蓝色=0，橙色=1。行表示查询（Query），列表示键（Key）；边框标记所选查询行。", "contributions": "{token} 的加权贡献", "sum": "对贡献矩阵的各行求和，即得到该查询的输出。", "output": "注意力输出", "err": {"tokens": "每个输入行需对应一个非空 token 标签（每个最多 32 个字符）。"}},
   multihead: {"heads": "头数", "head": "第 {i} 头", "inspect": "查看注意力头", "note": "d_model 为输入宽度，必须能被头数整除。各头使用独立 Wq/Wk/Wv，d_head=d_model/heads；Wo 为单独的输出投影。", "concat": "各头拼接", "projected": "投影后输出", "projections": "独立投影", "headOutput": "该头输出", "err": {"divisible": "d_model 必须能被头数整除（头数不能超过 d_model）。"}},
   home: {
+  "related": "相关主题：{topic}",
+  "courseTitle": "正在配合 CS231n 学习？",
+  "courseNote": "主题标签帮助你将实验与课程概念对应。本项目是独立的辅助学习工具，并非课程官方项目。",
+  "courseSchedule": "官方主题安排",
+  "courseReading": "官方课程笔记",
+  "courseTopics": {
+    "numpy": "NumPy 数组",
+    "networks": "神经网络（Neural Networks）",
+    "classifiers": "线性分类器 / softmax loss",
+    "backprop": "反向传播（Backpropagation）",
+    "training": "神经网络训练",
+    "optimization": "优化 / 正则化",
+    "cnn": "卷积网络（CNN）",
+    "architectures": "CNN 架构",
+    "attention": "自注意力（Self-Attention）"
+  }
+,
   "recommended": "选择适合你的学习路线",
   "choose": "从基础开始，或直接学习今天需要的主题。",
   "paths": {

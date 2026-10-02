@@ -5,6 +5,8 @@ export const LEARNING_STEPS = [["tensor", "beginner", "fundamentals"], ["activat
 
 export const RECOMMENDED_PATHS = {"foundations": ["tensor", "activations", "losses", "graph", "backprop", "optimizers"], "vision": ["tensor", "backprop", "cnn", "pooling", "receptive", "residual", "normalization"], "attention": ["tensor", "activations", "losses", "normalization", "attention", "multihead"]};
 
+const COURSE_TOPICS = { tensor: 'numpy', activations: 'networks', losses: 'classifiers', graph: 'backprop', backprop: 'backprop', init: 'training', optimizers: 'optimization', regularization: 'optimization', cnn: 'cnn', pooling: 'cnn', receptive: 'cnn', residual: 'architectures', normalization: 'architectures', attention: 'attention', multihead: 'attention' };
+
 export function render(root) {
   root.innerHTML = `
     <section class="home-hero" aria-labelledby="home-brand">
@@ -28,11 +30,16 @@ export function render(root) {
           <span class="learning-number">${String(i + 1).padStart(2, '0')}</span>
           <span class="learning-detail"><strong>${t(`nav.${id}`)}</strong>
             <span class="learning-description">${t(`home.steps.${id}`)}</span>
+            <span class="learning-related">${t('home.related', { topic: t(`home.courseTopics.${COURSE_TOPICS[id]}`) })}</span>
             <span class="learning-tags"><span>${t(`home.level.${level}`)}</span><span>${t(`home.topic.${topic}`)}</span></span>
           </span><span class="learning-arrow" aria-hidden="true">→</span></a></li>`).join('')}</ol>
     </section>
     <section class="panel home-practice"><h3>${t('home.practice')}</h3><p class="hint">${t('home.practiceNote')}</p>
       <div class="home-actions">${['playground','diagnostics','lr'].map(id=>`<a href="#${id}">${t(`nav.${id}`)} →</a>`).join('')}</div>
+    </section>
+    <section class="panel home-course"><h3>${t('home.courseTitle')}</h3><p class="hint">${t('home.courseNote')}</p>
+      <div class="home-actions"><a href="https://cs231n.stanford.edu/schedule.html" target="_blank" rel="noopener noreferrer">${t('home.courseSchedule')} ↗</a>
+        <a href="https://cs231n.github.io/" target="_blank" rel="noopener noreferrer">${t('home.courseReading')} ↗</a></div>
     </section>`;
   function selectPath(id) {
     root.querySelectorAll('[data-path]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.path === id)));
