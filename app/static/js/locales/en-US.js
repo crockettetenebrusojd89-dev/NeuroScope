@@ -8,6 +8,7 @@ export default {
     loadFailed: 'Failed to load page: {msg}',
   },
   nav: {
+    residual: "Residual Connection",
     receptive: "Receptive Field",
     normalization: "Normalization",
     fundamentals: 'Fundamentals',
@@ -49,6 +50,7 @@ export default {
     pressAnimate: 'Press “Animate window”.',
   },
   pages: {
+    residual: {"title": "Residual Connection Lab", "desc": "Real plain/residual forward and backward passes with shared weights and an identical output gradient."},
     receptive: {"title": "Receptive Field Lab", "desc": "Configure a CNN, select any feature and trace exact input dependencies."},
     normalization: {"title": "Normalization Lab", "desc": "Compare BatchNorm and LayerNorm axes, values, statistics and distributions."},
     tensor: {
@@ -324,4 +326,5 @@ export default {
   p2: {"before": "Before", "after": "After", "err": {"json": "Enter valid JSON.", "matrix": "{field}: enter a nonempty rectangular 2D matrix (at most 1024 elements).", "finite": "{field}: values must be finite and within the supported range.", "config": "Invalid or out-of-range parameter: {field}."}},
   normalization: {"values": "X [N, D] (JSON)", "kind": "Method", "epsilon": "ε", "gamma": "γ", "beta": "β", "scope": "Training-batch statistics, ddof=0. Scalar γ/β; no running statistics. Constant groups have variance 0; ε keeps division finite.", "batchAxis": "BatchNorm: axis=0 (N ↓). Each column/feature is a separate group; samples share its μ/σ².", "layerAxis": "LayerNorm: axis=1 (D →). Each row/sample is a separate group; features share its μ/σ².", "group": "Highlight normalization group", "feature": "Feature D={i}", "sample": "Sample N={i}", "stats": "Statistics for every group (population variance)", "beforeHist": "Before: selected group distribution (counts)", "afterHist": "After: selected group distribution (same bins)"},
   rf: {"inputSize": "Input size", "depth": "Layer count", "kernel": "Kernel size", "stride": "Stride", "padding": "Padding", "layer": "Layer {i}", "mapSize": "Feature map size", "note": "Square kernels, symmetric zero padding, no dilation. The grid selects feature coordinates, not activation values.", "feature": "Select a feature coordinate", "selectLayer": "Inspect layer", "input": "Exact input support", "support": "Layer {layer}, feature [{row},{col}] depends on {count} real input pixels.", "boundsNote": "Half-open theoretical bounds may extend into padding. Orange cells mark exact real dependencies; stride can leave holes inside the box."},
+  residual: {"depth": "Depth", "seed": "Seed", "scale": "Weight scale", "note": "Square tanh blocks, no post-add activation. A fixed linear objective probes gradient transport; this is not training or an accuracy benchmark.", "fair": "Same input, seed, weights and output gradient in both networks. Every seed is shown as requested; residual gradients can also shrink or grow. Change depth, scale and seed to explore.", "gradNorm": "Activation gradient norms (linear scale, a₀=X)", "actNorm": "Forward activation norms", "stats": "Exact per-depth norms", "block": "Inspect block", "forward": "Forward values", "backward": "Backward: branch + identity skip"},
 };

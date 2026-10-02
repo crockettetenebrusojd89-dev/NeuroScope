@@ -120,3 +120,13 @@ Starting with n=input_size, j=1, r=1, offset=0:
 backwards and discard out-of-bounds intermediate coordinates at each layer.
 For k=1,s=3 followed by k=2,s=1, the 4-wide box has only two indices
 per axis; highlighting the entire rectangle would be mathematically wrong.
+
+## 10. Residual gradient transport
+
+F(x)=tanh(xW+b). Plain y=F(x); residual y=F(x)+x, without a post-add
+activation. For upstream G: dz=G⊙(1−F²), dW=xᵀdz, db=sum_rows(dz),
+dx_F=dzWᵀ. The skip contributes G, so dx=dx_F+G.
+Both networks use the same W sampled from N(0,scale²/D), zero bias,
+input and final G=1/(N*D), corresponding to L=mean(Y). This isolates
+gradient transport; it does not show training or prove accuracy superiority.
+All seeds are directly displayed; no filtering for a preferred result.

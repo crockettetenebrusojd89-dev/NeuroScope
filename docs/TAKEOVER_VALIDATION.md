@@ -53,3 +53,14 @@ interior and boundary feature clicks. X=12, k1=1/s1=3/p1=0, k2=2/s2=1/p2=0
 with feature [1,1] showed box [3,3,7,7) and exactly **4 highlighted pixels**.
 All three modes rendered with zero error boxes and no console errors.
 Browser QA found and corrected depth-field synchronization before commit.
+
+### P2-3 Residual Connection — completed
+
+Full pytest **71 passed in 0.73s**; **23 JS files**, **270 locale keys**
+and routing regression passed. Numerical central differences verify every
+input/weight/bias gradient for both plain and residual two-block networks.
+Browser tested JSON, depth, seed, scale, Compute and block selector.
+At X=[[1,2]], depth=3, scale=0, plain output/dx were [0,0]; residual
+output was [1,2] and dx [0.5,0.5], exactly the identity path reference.
+Depth=16, scale=1.5, seed=1 rendered finite norms. All three language
+modes and console checks passed.

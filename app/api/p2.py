@@ -25,3 +25,11 @@ from neuroscope.cnn.receptive_field import receptive_field
 def receptive(payload: dict = Body(...)):
     return compute(receptive_field, payload.get("input_size", 16), payload.get("layers"),
                    payload.get("selected_layer"), payload.get("row", 0), payload.get("col", 0))
+
+from neuroscope.core.residual import residual_lab
+
+
+@router.post("/residual")
+def residual(payload: dict = Body(...)):
+    return compute(residual_lab, payload.get("values"), payload.get("depth",8),
+                   payload.get("seed",0), payload.get("scale",0.8))

@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Residual Connection Lab: seeded shared-weight plain/residual tanh stacks,
+  identical linear output probe, real gradient norms and per-block forward /
+  nonlinear-branch / identity-skip backward values; 15 tests including full
+  input, weight and bias numerical gradient checks.
 - Receptive Field Lab: configurable square CNN layers, real size/jump/RF
   calculations, feature selection and exact input support (including stride
   holes and padding at intermediate layers); 11 tests added.

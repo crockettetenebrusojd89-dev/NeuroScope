@@ -30,7 +30,7 @@ Status legend: ✅ shipped · 🚧 planned
   variance before/after normalization.
 - ✅ **Receptive Field Lab** — click a deep feature, highlight its receptive
   field on the input image as CNN depth grows.
-- 🚧 **Residual Connection Lab** — plain vs residual network: `F(x) + x` and
+- ✅ **Residual Connection Lab** — plain vs residual network: `F(x) + x` and
   the gradient-highway difference.
 - 🚧 **Attention Lab** — self-attention step by step: Q, K, V, QKᵀ, scaling,
   softmax, weights, weighted sum; heatmap over a typed token sequence.
