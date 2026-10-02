@@ -32,7 +32,7 @@ Status legend: ✅ shipped · 🚧 planned
   field on the input image as CNN depth grows.
 - ✅ **Residual Connection Lab** — plain vs residual network: `F(x) + x` and
   the gradient-highway difference.
-- 🚧 **Attention Lab** — self-attention step by step: Q, K, V, QKᵀ, scaling,
+- ✅ **Attention Lab** — self-attention step by step: Q, K, V, QKᵀ, scaling,
   softmax, weights, weighted sum; heatmap over a typed token sequence.
 - 🚧 **Multi-Head Attention** — per-head attention weight inspection.
 

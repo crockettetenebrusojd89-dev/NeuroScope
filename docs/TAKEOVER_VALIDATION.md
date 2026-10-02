@@ -64,3 +64,13 @@ At X=[[1,2]], depth=3, scale=0, plain output/dx were [0,0]; residual
 output was [1,2] and dx [0.5,0.5], exactly the identity path reference.
 Depth=16, scale=1.5, seed=1 rendered finite norms. All three language
 modes and console checks passed.
+
+### P2-4 Self-Attention — completed
+
+Full pytest **85 passed in 0.69s**; **25 JS files**, **286 locale keys**
+and routing regression passed. Tests include hand-computed scaling/softmax
+weighted sums, uniform/single-token cases, large-score stability, projection
+shapes and token-only-label invariance. Browser tested tokens, X, d_k, seed,
+Compute and query selector. For X=I₂, d_k=3, seed=4, displayed contribution
+row sums matched displayed output [0.949006,-0.547649,-0.083942] within
+1.1e-6 (rounding). All three modes and zero-console checks passed.

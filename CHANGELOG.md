@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Self-Attention Lab: seeded NumPy Q/K/V projections, raw dot products,
+  sqrt(d_k) scaling, stable softmax, fixed-scale true attention heatmaps,
+  token selection and explicit weighted contributions/output; 14 tests.
 - Residual Connection Lab: seeded shared-weight plain/residual tanh stacks,
   identical linear output probe, real gradient norms and per-block forward /
   nonlinear-branch / identity-skip backward values; 15 tests including full

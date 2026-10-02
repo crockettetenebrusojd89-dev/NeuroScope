@@ -145,3 +145,5 @@ canvas.plot { width: 100%; background: var(--bg-raised); border-radius: 8px; dis
 .lab-grid .covered { background: var(--accent-2); color: var(--bg); }
 .rf-pixel { aspect-ratio: 1; border: 1px solid var(--border); background: var(--bg-raised); }
 .rf-pixel.covered { background: var(--accent-2); }
+.attention-map td { color: #fff; min-width: 72px; }
+.attention-map .query-row td { border-top: 2px solid var(--accent-2); border-bottom: 2px solid var(--accent-2); }

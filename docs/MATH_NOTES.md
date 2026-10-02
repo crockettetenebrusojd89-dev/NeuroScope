@@ -130,3 +130,13 @@ Both networks use the same W sampled from N(0,scale²/D), zero bias,
 input and final G=1/(N*D), corresponding to L=mean(Y). This isolates
 gradient transport; it does not show training or prove accuracy superiority.
 All seeds are directly displayed; no filtering for a preferred result.
+
+## 11. Self-attention
+
+For X[N,D] and Wq/Wk/Wv[D,d_k], Q=XWq, K=XWk, V=XWv.
+Raw S=QKᵀ[N,N]; scaled S/√d_k; A=softmax(S/√d_k) rowwise
+using max-subtracted exponents. Y=AV[N,d_k]. Each selected query i
+shows contributions A[i,j]*V[j,:] whose sum is Y[i,:].
+The UI fixes d_v=d_k and uses a shared 0..1 heatmap color scale. Token
+labels do not change X. Projections are seeded untrained random matrices,
+without positional encodings, masking or claims about language semantics.

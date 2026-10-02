@@ -33,3 +33,11 @@ from neuroscope.core.residual import residual_lab
 def residual(payload: dict = Body(...)):
     return compute(residual_lab, payload.get("values"), payload.get("depth",8),
                    payload.get("seed",0), payload.get("scale",0.8))
+
+from neuroscope.core.attention import self_attention
+
+
+@router.post("/attention")
+def attention(payload: dict = Body(...)):
+    return compute(self_attention,payload.get('values'),payload.get('tokens'),
+                   payload.get('dk',2),payload.get('seed',0))

@@ -8,6 +8,7 @@ export default {
     loadFailed: 'Failed to load page: {msg}',
   },
   nav: {
+    attention: "Attention",
     residual: "Residual Connection",
     receptive: "Receptive Field",
     normalization: "Normalization",
@@ -50,6 +51,7 @@ export default {
     pressAnimate: 'Press “Animate window”.',
   },
   pages: {
+    attention: {"title": "Self-Attention Lab", "desc": "Inspect Q/K/V projections, scaled dot products, softmax weights and token-wise weighted sums."},
     residual: {"title": "Residual Connection Lab", "desc": "Real plain/residual forward and backward passes with shared weights and an identical output gradient."},
     receptive: {"title": "Receptive Field Lab", "desc": "Configure a CNN, select any feature and trace exact input dependencies."},
     normalization: {"title": "Normalization Lab", "desc": "Compare BatchNorm and LayerNorm axes, values, statistics and distributions."},
@@ -327,4 +329,5 @@ export default {
   normalization: {"values": "X [N, D] (JSON)", "kind": "Method", "epsilon": "ε", "gamma": "γ", "beta": "β", "scope": "Training-batch statistics, ddof=0. Scalar γ/β; no running statistics. Constant groups have variance 0; ε keeps division finite.", "batchAxis": "BatchNorm: axis=0 (N ↓). Each column/feature is a separate group; samples share its μ/σ².", "layerAxis": "LayerNorm: axis=1 (D →). Each row/sample is a separate group; features share its μ/σ².", "group": "Highlight normalization group", "feature": "Feature D={i}", "sample": "Sample N={i}", "stats": "Statistics for every group (population variance)", "beforeHist": "Before: selected group distribution (counts)", "afterHist": "After: selected group distribution (same bins)"},
   rf: {"inputSize": "Input size", "depth": "Layer count", "kernel": "Kernel size", "stride": "Stride", "padding": "Padding", "layer": "Layer {i}", "mapSize": "Feature map size", "note": "Square kernels, symmetric zero padding, no dilation. The grid selects feature coordinates, not activation values.", "feature": "Select a feature coordinate", "selectLayer": "Inspect layer", "input": "Exact input support", "support": "Layer {layer}, feature [{row},{col}] depends on {count} real input pixels.", "boundsNote": "Half-open theoretical bounds may extend into padding. Orange cells mark exact real dependencies; stride can leave holes inside the box."},
   residual: {"depth": "Depth", "seed": "Seed", "scale": "Weight scale", "note": "Square tanh blocks, no post-add activation. A fixed linear objective probes gradient transport; this is not training or an accuracy benchmark.", "fair": "Same input, seed, weights and output gradient in both networks. Every seed is shown as requested; residual gradients can also shrink or grow. Change depth, scale and seed to explore.", "gradNorm": "Activation gradient norms (linear scale, a₀=X)", "actNorm": "Forward activation norms", "stats": "Exact per-depth norms", "block": "Inspect block", "forward": "Forward values", "backward": "Backward: branch + identity skip"},
+  attention: {"tokens": "Token labels (space separated)", "dk": "d_k = d_v", "seed": "Projection seed", "note": "Supply numeric embeddings X; token text labels rows only. Seeded projections are untrained, without positional encodings or a causal mask. This is a math lab, not a pretrained language model.", "query": "Select query token", "raw": "Raw scores", "scaled": "Scaled scores", "weights": "Attention weights", "legend": "Fixed color scale: blue=0, orange=1. Rows are queries, columns are keys; highlighted row is the selected query.", "contributions": "Contributions for {token}", "sum": "Sum the contribution rows to obtain this query output.", "output": "Attention output", "err": {"tokens": "Provide one nonempty token label per input row (at most 32 characters each)."}},
 };
