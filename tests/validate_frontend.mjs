@@ -61,4 +61,19 @@ cnnEls['c-play'].onclick(); tick(); tick();
 assert.ok(cnnEls['c-detail'].innerHTML.includes('SUM=<b>0.400</b>'),'animated window must match padded output');
 assert.deepEqual(drawnInput,padded,'input visualization includes real zero padding');
 disposeCNN(); assert.equal(cancelled,true,'leaving CNN stops animation');
-console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links, 3 valid recommended routes; CNN animation: 3 regressions passed`);
+// Render and rebuild Playground after switching moons -> xor.
+const playgroundSource=readFileSync(resolve(base,'app/static/js/pages/playground.js'),'utf8').replace(/^import .*;$/gm,'').replace('export async function render','async function render');
+const fieldValues={'p-ds':'moons','p-n':'400','p-noise':'0.12','p-split':'0.25','p-act':'tanh','p-init':'xavier','p-opt':'adam','p-lr':'0.03','p-mom':'0.9','p-b1':'0.9','p-b2':'0.999'};
+const pgEls = new Map();
+const pgRoot={isConnected:true,querySelector:id=>{if(!pgEls.has(id))pgEls.set(id,{value:fieldValues[id.slice(1)]??'',querySelectorAll:()=>[]});return pgEls.get(id);}};
+let displayedPoints,datasetRequests=[];
+const pgContext=vm.createContext({NS:{},api:async(path,args)=>{
+  if(path==='/datasets'){datasetRequests.push(args.name);let marker=args.name==='xor'?9:1;return {train:{X:[[marker,marker]],y:[0]},test:{X:[],y:[]},extent:[-1,1,-1,1]};}
+  if(path==='/playground/create')return {session_id:'test',extent:[-1,1,-1,1]};
+  if(path==='/playground/step')return {epoch:1,boundary:[[0.5]],extent:[-1,1,-1,1],history:{train_loss:[0.7],val_loss:[0.7],train_acc:[0.5],val_acc:[0.5]}};
+},lineChart(){},boundaryPlot:(canvas,grid,extent,X)=>{displayedPoints=X;},t:key=>key,errText:String,setInterval(){},clearInterval(){}});
+vm.runInContext(playgroundSource+'\nglobalThis.renderPG=render;',pgContext);
+await pgContext.renderPG(pgRoot);pgEls.get('#p-ds').value='xor';await pgEls.get('#p-create').onclick();
+assert.deepEqual(datasetRequests,['moons','xor'],'rebuild reloads the selected dataset');
+assert.deepEqual(JSON.parse(JSON.stringify(displayedPoints)),[[9,9]],'points belong to rebuilt model dataset');
+console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links, 3 valid recommended routes; CNN animation: 3 regressions passed; Playground dataset: 2 regressions passed`);

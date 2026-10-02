@@ -103,7 +103,8 @@ export async function render(root) {
     stop();
     $('#p-error').innerHTML = '';
     try {
-      if (!dataCache) await loadData();
+      // Match displayed points to the dataset used by the new model.
+      await loadData();
       const cfg = {
         dataset: {
           name: $('#p-ds').value, n_samples: +$('#p-n').value,
