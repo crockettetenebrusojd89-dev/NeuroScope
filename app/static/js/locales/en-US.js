@@ -8,6 +8,7 @@ export default {
     loadFailed: 'Failed to load page: {msg}',
   },
   nav: {
+    normalization: "Normalization",
     fundamentals: 'Fundamentals',
     networks: 'Networks',
     training: 'Training',
@@ -47,6 +48,7 @@ export default {
     pressAnimate: 'Press “Animate window”.',
   },
   pages: {
+    normalization: {"title": "Normalization Lab", "desc": "Compare BatchNorm and LayerNorm axes, values, statistics and distributions."},
     tensor: {
       title: 'Tensor & Shape Lab',
       desc: 'See how reshape, transpose, matmul, broadcasting and axis reductions transform tensor shapes.',
@@ -317,4 +319,6 @@ export default {
     detailTitle: 'Current window',
     windowDetail: 'Window (row {r}, col {c}): {region} → {mode} = {val} → output[{i}, {j}]',
   },
+  p2: {"before": "Before", "after": "After", "err": {"json": "Enter valid JSON.", "matrix": "{field}: enter a nonempty rectangular 2D matrix (at most 1024 elements).", "finite": "{field}: values must be finite and within the supported range.", "config": "Invalid or out-of-range parameter: {field}."}},
+  normalization: {"values": "X [N, D] (JSON)", "kind": "Method", "epsilon": "ε", "gamma": "γ", "beta": "β", "scope": "Training-batch statistics, ddof=0. Scalar γ/β; no running statistics. Constant groups have variance 0; ε keeps division finite.", "batchAxis": "BatchNorm: axis=0 (N ↓). Each column/feature is a separate group; samples share its μ/σ².", "layerAxis": "LayerNorm: axis=1 (D →). Each row/sample is a separate group; features share its μ/σ².", "group": "Highlight normalization group", "feature": "Feature D={i}", "sample": "Sample N={i}", "stats": "Statistics for every group (population variance)", "beforeHist": "Before: selected group distribution (counts)", "afterHist": "After: selected group distribution (same bins)"},
 };

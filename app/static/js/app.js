@@ -5,7 +5,7 @@ import { t, raw, getMode, setMode, onLanguageChange } from './i18n.js';
 const PAGE_ORDER = [
   { group: 'fundamentals', pages: ['tensor', 'activations', 'losses', 'graph'] },
   { group: 'networks', pages: ['playground', 'backprop', 'diagnostics'] },
-  { group: 'training', pages: ['optimizers', 'init', 'lr', 'regularization'] },
+  { group: 'training', pages: ['optimizers', 'init', 'lr', 'regularization', 'normalization'] },
   { group: 'convolution', pages: ['cnn', 'pooling'] },
 ];
 
@@ -13,7 +13,7 @@ const PAGE_MODS = {
   tensor: 'tensor', activations: 'activations', losses: 'losses', graph: 'graph',
   playground: 'playground', backprop: 'backprop', diagnostics: 'diagnostics',
   optimizers: 'optimizers', init: 'init', lr: 'lr', regularization: 'regularization',
-  cnn: 'cnn', pooling: 'pooling',
+  cnn: 'cnn', pooling: 'pooling', normalization: 'normalization',
 };
 
 const loaded = {};

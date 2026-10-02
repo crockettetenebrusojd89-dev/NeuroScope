@@ -68,3 +68,13 @@ at ~5 Hz and render smooth live curves.
 - No autograd framework, no GPU, no async task queue, no database, no build
   tooling. Each would raise the floor for contributors without teaching
   anything about deep learning.
+
+## P2 contracts
+
+`app/api/p2.py` serves new labs independently from the existing routes.
+`core/lab_utils.py` validates bounded finite inputs and serializes results
+without nan_to_num/clamping. Structured i18n errors match the existing client.
+`core/normalization.py` supplies BatchNorm/LayerNorm and group statistics.
+`js/lab.js` supplies shared number/table rendering; locale strings remain
+in the existing zh-CN/en-US resources. Each SPA navigation has a dedicated
+mount with a disposal hook for timers; async imports are version guarded.

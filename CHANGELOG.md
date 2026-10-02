@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- Normalization Lab: real NumPy training-batch BatchNorm/LayerNorm on X[N,D],
+  axis/group highlighting, editable epsilon/gamma/beta, before/after group
+  mean/variance and shared-bin histograms; fully localized. 16 new numerical
+  and validation tests; no nonfinite result clamping in P2 APIs.
+
 ### Fixed
 - Isolate each SPA page mount and ignore stale module imports so delayed API
   responses cannot update a replacement page. Stop training and graph playback

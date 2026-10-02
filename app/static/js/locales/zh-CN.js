@@ -9,6 +9,7 @@ export default {
     loadFailed: '页面加载失败：{msg}',
   },
   nav: {
+    normalization: "归一化",
     fundamentals: '基础知识',
     networks: '神经网络',
     training: '训练',
@@ -48,6 +49,7 @@ export default {
     pressAnimate: '点击「播放窗口动画」查看逐步过程。',
   },
   pages: {
+    normalization: {"title": "归一化实验室", "desc": "对比批归一化（BatchNorm）与层归一化（LayerNorm）的计算维度、数值、统计量与分布。"},
     tensor: {
       title: '张量与形状实验室',
       desc: '观察 reshape、transpose、matmul、广播（Broadcasting）和轴（Axis）归约如何改变张量（Tensor）的形状与数据排列。',
@@ -318,4 +320,6 @@ export default {
     detailTitle: '当前窗口',
     windowDetail: '窗口 (行 {r}, 列 {c})：{region} → {mode} = {val} → output[{i}, {j}]',
   },
+  p2: {"before": "操作前", "after": "操作后", "err": {"json": "请输入合法的 JSON。", "matrix": "{field}：请输入非空矩形二维矩阵（最多 1024 个元素）。", "finite": "{field}：数值必须有限且在支持范围内。", "config": "参数无效或超出范围：{field}。"}},
+  normalization: {"values": "X [N, D] (JSON)", "kind": "方法", "epsilon": "ε", "gamma": "γ", "beta": "β", "scope": "使用当前批次统计量，ddof=0；γ/β 为标量，不包含运行统计量。常量组的方差为 0，ε 保证除法有限。", "batchAxis": "BatchNorm：沿 axis=0（N ↓）计算。每列特征为一组，样本共享该列的 μ/σ²。", "layerAxis": "LayerNorm：沿 axis=1（D →）计算。每行样本为一组，特征共享该行的 μ/σ²。", "group": "高亮归一化组", "feature": "特征 D={i}", "sample": "样本 N={i}", "stats": "各组统计量（总体方差）", "beforeHist": "操作前：所选组的分布（计数）", "afterHist": "操作后：所选组的分布（相同分箱）"},
 };

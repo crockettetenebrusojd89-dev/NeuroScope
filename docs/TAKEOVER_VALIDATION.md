@@ -33,3 +33,13 @@ including rapid navigation away from auto-running Learning Rate.
 ## P2 progress
 
 All five modules pending until recorded below. No claims based on prior agent screenshots.
+
+### P2-1 Normalization — completed
+
+Full pytest: **45 passed in 0.71s**. Frontend: **21 JS files**, **240 keys**,
+placeholder parity, **4 lifecycle assertions** passed. Browser tested every
+visible lab control: JSON, method, ε/γ/β, Compute, group selector.
+BatchNorm column highlighting counted 4 cells; LayerNorm row highlighting 2.
+Hand reference X=[[1,3],[10,14]], ε=.01, γ=2, β=3 gave means 3 and
+variances 3.960396/3.990025. Invalid JSON and epsilon=0 show localized errors.
+All three modes persist after reload; zero console errors.

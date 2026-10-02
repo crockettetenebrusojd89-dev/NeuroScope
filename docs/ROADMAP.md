@@ -24,9 +24,9 @@ Status legend: ✅ shipped · 🚧 planned
 - ✅ CNN Convolution Lab
 - ✅ Pooling Lab
 
-## P2 — Advanced 🚧 (not yet implemented; P0/P1 stability came first)
+## P2 — Advanced (in progress)
 
-- 🚧 **Normalization Lab** — BatchNorm vs LayerNorm: distributions, mean and
+- ✅ **Normalization Lab** — BatchNorm vs LayerNorm: distributions, mean and
   variance before/after normalization.
 - 🚧 **Receptive Field Lab** — click a deep feature, highlight its receptive
   field on the input image as CNN depth grows.
@@ -41,5 +41,5 @@ Status legend: ✅ shipped · 🚧 planned
 - Save/share playground configurations as URLs
 - Export a trained MLP's weights as JSON
 - More computational-graph examples (user-editable graphs)
-- Internationalization of the UI
+- Extended localization (three UI modes already shipped in v0.2.0)
 - GPU-free "MNIST-in-the-browser" demo using the NumPy engine

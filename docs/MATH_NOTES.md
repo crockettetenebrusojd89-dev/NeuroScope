@@ -101,3 +101,12 @@ out_size = ⌊(H + 2P − K)/S⌋ + 1
 Max pooling keeps the strongest feature in each window; average pooling
 smooths. Both are computed with explicit loops and the window coordinates
 are returned for UI animation (`cnn/conv.py`).
+
+## 8. Normalization
+
+For X[N,D], BatchNorm reduces axis=0; LayerNorm reduces axis=1.
+Population variance (ddof=0): μ=mean(x), σ²=mean((x−μ)²).
+`y = γ (x−μ) / sqrt(σ²+ε) + β`. After affine normalization,
+mean is β and variance is `γ²σ²/(σ²+ε)`, including zero for constant groups.
+This lab uses current-batch statistics and scalar γ/β; inference running
+statistics and convolutional BatchNorm are outside its scope.
