@@ -8,6 +8,7 @@ export default {
     loadFailed: 'Failed to load page: {msg}',
   },
   nav: {
+    home: "Learning Path",
     multihead: "Multi-Head Attention",
     attention: "Attention",
     residual: "Residual Connection",
@@ -52,6 +53,7 @@ export default {
     pressAnimate: 'Press “Animate window”.',
   },
   pages: {
+    home: {"title": "Deep Learning Learning Path", "desc": "Choose a starting point. Explore 18 interactive labs in 中文, bilingual, or English."},
     multihead: {"title": "Multi-Head Attention Lab", "desc": "Independent per-head Q/K/V projections, true attention maps, concatenation and output projection."},
     attention: {"title": "Self-Attention Lab", "desc": "Inspect Q/K/V projections, scaled dot products, softmax weights and token-wise weighted sums."},
     residual: {"title": "Residual Connection Lab", "desc": "Real plain/residual forward and backward passes with shared weights and an identical output gradient."},
@@ -333,4 +335,42 @@ export default {
   residual: {"depth": "Depth", "seed": "Seed", "scale": "Weight scale", "note": "Square tanh blocks, no post-add activation. A fixed linear objective probes gradient transport; this is not training or an accuracy benchmark.", "fair": "Same input, seed, weights and output gradient in both networks. Every seed is shown as requested; residual gradients can also shrink or grow. Change depth, scale and seed to explore.", "gradNorm": "Activation gradient norms (linear scale, a₀=X)", "actNorm": "Forward activation norms", "stats": "Exact per-depth norms", "block": "Inspect block", "forward": "Forward values", "backward": "Backward: branch + identity skip"},
   attention: {"tokens": "Token labels (space separated)", "dk": "d_k = d_v", "seed": "Projection seed", "note": "Supply numeric embeddings X; token text labels rows only. Seeded projections are untrained, without positional encodings or a causal mask. This is a math lab, not a pretrained language model.", "query": "Select query token", "raw": "Raw scores", "scaled": "Scaled scores", "weights": "Attention weights", "legend": "Fixed color scale: blue=0, orange=1. Rows are queries, columns are keys; highlighted row is the selected query.", "contributions": "Contributions for {token}", "sum": "Sum the contribution rows to obtain this query output.", "output": "Attention output", "err": {"tokens": "Provide one nonempty token label per input row (at most 32 characters each)."}},
   multihead: {"heads": "Head count", "head": "Head {i}", "inspect": "Inspect head", "note": "d_model is the input width and must be divisible by heads. Each head has independent Wq/Wk/Wv; d_head=d_model/heads. Wo is a separate output projection.", "concat": "Concatenated heads", "projected": "Projected output", "projections": "Independent projections", "headOutput": "Head output", "err": {"divisible": "d_model must be divisible by the head count (heads <= d_model)."}},
+  home: {
+  "eyebrow": "Learn by seeing the math",
+  "intro": "Explore deep learning through small, real calculations. Change an input, watch the result, and follow the gradient.",
+  "start": "Start Learning",
+  "browse": "Explore the path",
+  "fullPath": "From tensors to attention",
+  "orderNote": "Read the chain rule before training. Then explore CNNs, skip connections, normalization, and attention.",
+  "practice": "Put the ideas to work",
+  "practiceNote": "Use these companion experiments alongside the main path.",
+  "level": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "topic": {
+    "fundamentals": "Fundamentals",
+    "training": "Training",
+    "cnn": "CNN",
+    "modern": "Modern DL"
+  },
+  "steps": {
+    "tensor": "Reshape values and track dimensions.",
+    "activations": "Connect nonlinear curves to derivatives.",
+    "losses": "See how predictions change the loss.",
+    "graph": "Trace values and local gradients.",
+    "backprop": "Follow gradients through every layer.",
+    "init": "Compare signal and gradient scales.",
+    "optimizers": "Watch update rules cross a landscape.",
+    "regularization": "Compare fitting and generalization.",
+    "cnn": "Move a kernel across an image.",
+    "pooling": "Reduce a local window to one value.",
+    "receptive": "Trace a feature back to input pixels.",
+    "residual": "Compare branch and identity gradients.",
+    "normalization": "See which dimensions share statistics.",
+    "attention": "Build Q/K/V and weighted outputs.",
+    "multihead": "Inspect heads, concat, and projection."
+  }
+},
 };

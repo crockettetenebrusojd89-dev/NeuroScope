@@ -19,7 +19,7 @@ for (const f of js) {
 class Element { constructor(){this.children=[];this.dataset={};this.classList={toggle(){}};} replaceChildren(...cs){this.children=cs;} addEventListener(){} }
 const els = Object.fromEntries(['nav','brand-sub','sidebar-footer','page-title','page-desc','page-content'].map(k=>[k,new Element()]));
 let release; const delayed = new Promise(r=>{release=r;}); let oldRoot, newRoot, disposed=0;
-const ctx = vm.createContext({document:{getElementById:k=>els[k],querySelectorAll:()=>[],createElement:()=>new Element(),documentElement:{}},window:{addEventListener(){}},location:{hash:'#tensor'},console,t:k=>zh[k]??k,raw:k=>({zh:zh[k],en:en[k]}),getMode:()=> 'zh',setMode(){},onLanguageChange(){},loadModule:async mod=>mod==='tensor'?delayed:{render:async root=>{newRoot=root;return ()=>disposed++;}}});
+const ctx = vm.createContext({document:{getElementById:k=>els[k],querySelectorAll:()=>[],createElement:()=>new Element(),documentElement:{}},window:{addEventListener(){},scrollTo(){}},location:{hash:'#tensor'},console,t:k=>zh[k]??k,raw:k=>({zh:zh[k],en:en[k]}),getMode:()=> 'zh',setMode(){},onLanguageChange(){},loadModule:async mod=>mod==='tensor'?delayed:{render:async root=>{newRoot=root;return ()=>disposed++;}}});
 let shell = readFileSync(resolve(base,'app/static/js/app.js'),'utf8').replace(/^import .*;$/m,'').replace('await import(`./pages/${mod}.js`)','await loadModule(mod)');
 vm.runInContext(shell+'\nglobalThis.navigate=showPage;',ctx);
 await ctx.navigate('activations');
@@ -30,4 +30,15 @@ assert.equal(els['page-content'].children[0],newRoot);
 await ctx.navigate('tensor');
 assert.equal(disposed,1,'navigation disposes active page');
 assert.notEqual(oldRoot,newRoot,'async callbacks must retain a dedicated mount');
-console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 4 assertions passed`);
+await ctx.navigate('');
+assert.equal(els['page-title'].textContent,zh['pages.home.title'],'empty route opens Learning Path');
+await ctx.navigate('missing-page');
+assert.equal(els['page-title'].textContent,zh['pages.home.title'],'unknown route opens Learning Path');
+const home = readFileSync(resolve(base,'app/static/js/pages/home.js'),'utf8');
+const steps = JSON.parse(home.match(/LEARNING_STEPS = (.*);/)[1]);
+assert.equal(steps.length,15);
+for(const [id,level,topic] of steps) {
+  assert.ok(new RegExp(`\\b${id}:`).test(shell),`Unknown lab link: ${id}`);
+  for(const k of [`nav.${id}`,`home.steps.${id}`,`home.level.${level}`,`home.topic.${topic}`]) assert.ok(k in zh,k);
+}
+console.log(`JS syntax: ${js.length} passed; i18n: ${Object.keys(zh).length} keys aligned, placeholders aligned; lifecycle: 6 assertions passed; Learning Path: 15 valid lab links`);

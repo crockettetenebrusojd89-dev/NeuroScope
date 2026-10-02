@@ -11,6 +11,7 @@ const PAGE_ORDER = [
 ];
 
 const PAGE_MODS = {
+  home: 'home',
   tensor: 'tensor', activations: 'activations', losses: 'losses', graph: 'graph',
   playground: 'playground', backprop: 'backprop', diagnostics: 'diagnostics',
   optimizers: 'optimizers', init: 'init', lr: 'lr', regularization: 'regularization',
@@ -24,9 +25,9 @@ let disposePage = null;
 
 function renderNav() {
   const nav = document.getElementById('nav');
-  nav.innerHTML = PAGE_ORDER.map(({ group, pages }) => `
+  nav.innerHTML = `<a href="#home" data-page="home" class="nav-item">${t('nav.home')}</a>` + PAGE_ORDER.map(({ group, pages }) => `
     <div class="nav-group">${t(`nav.${group}`)}</div>
-    ${pages.map(p => `<a data-page="${p}" class="nav-item">${t(`nav.${p}`)}</a>`).join('')}
+    ${pages.map(p => `<a href="#${p}" data-page="${p}" class="nav-item">${t(`nav.${p}`)}</a>`).join('')}
   `).join('') + `
     <div class="nav-group">${t('lang.label')}</div>
     <div class="lang-switch" id="lang-switch">
@@ -51,10 +52,11 @@ function markLang() {
 }
 
 async function showPage(key) {
-  if (!PAGE_MODS[key]) key = 'tensor';
+  if (!PAGE_MODS[key]) key = 'home';
   const version = ++pageVersion;
   if (disposePage) disposePage();
   disposePage = null;
+  if (currentKey !== key) window.scrollTo({ top: 0, behavior: 'instant' });
   currentKey = key;
   markActive();
 
@@ -92,8 +94,8 @@ document.getElementById('nav').addEventListener('click', e => {
   if (langBtn) setMode(langBtn.dataset.mode);
 });
 window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
-onLanguageChange(() => { renderNav(); showPage(currentKey || 'tensor'); });
+onLanguageChange(() => { renderNav(); showPage(currentKey || 'home'); });
 
 document.documentElement.lang = getMode() === 'en' ? 'en' : 'zh-CN';
 renderNav();
-showPage(location.hash.slice(1) || 'tensor');
+showPage(location.hash.slice(1) || 'home');

@@ -9,6 +9,7 @@ export default {
     loadFailed: '页面加载失败：{msg}',
   },
   nav: {
+    home: "学习路线",
     multihead: "多头注意力",
     attention: "注意力",
     residual: "残差连接",
@@ -53,6 +54,7 @@ export default {
     pressAnimate: '点击「播放窗口动画」查看逐步过程。',
   },
   pages: {
+    home: {"title": "深度学习路线", "desc": "选择你的起点，探索 18 个交互实验室。支持中文、中英双语与 English。"},
     multihead: {"title": "多头注意力实验室", "desc": "查看多头注意力（Multi-Head Attention）的各头独立 Q/K/V 投影、真实注意力图、拼接与输出投影。"},
     attention: {"title": "自注意力实验室", "desc": "查看 Q/K/V 投影、缩放点积注意力（Scaled Dot-Product Attention）、softmax 权重与逐 token 加权求和。"},
     residual: {"title": "残差连接实验室", "desc": "在相同权重与输出端梯度下，对比普通网络与残差网络（Residual Network）的真实前向传播、反向传播和梯度范数。"},
@@ -334,4 +336,42 @@ export default {
   residual: {"depth": "深度", "seed": "随机种子", "scale": "权重尺度", "note": "使用方形 tanh 模块，相加后不再激活。固定线性目标用于观察梯度传递；本实验不训练模型、不比较准确率。", "fair": "两种网络共用输入、种子、权重与输出端梯度，按所选种子直接显示结果。残差梯度也可能衰减或增长；改变深度、尺度和种子来探索。", "gradNorm": "激活梯度范数（线性轴，a₀=X）", "actNorm": "前向激活范数", "stats": "各深度的真实范数", "block": "查看模块", "forward": "前向数值", "backward": "反向：非线性分支 + 恒等捷径"},
   attention: {"tokens": "Token 标签（空格分隔）", "dk": "d_k = d_v", "seed": "投影随机种子", "note": "请提供数值嵌入 X；文本仅标记矩阵行。投影按种子随机生成、未经训练，不含位置编码或因果掩码。本页用于数学实验，不代表预训练语言模型。", "query": "选择查询 token", "raw": "原始分数", "scaled": "缩放后分数", "weights": "注意力权重", "legend": "固定色标：蓝色=0，橙色=1。行表示查询（Query），列表示键（Key）；边框标记所选查询行。", "contributions": "{token} 的加权贡献", "sum": "对贡献矩阵的各行求和，即得到该查询的输出。", "output": "注意力输出", "err": {"tokens": "每个输入行需对应一个非空 token 标签（每个最多 32 个字符）。"}},
   multihead: {"heads": "头数", "head": "第 {i} 头", "inspect": "查看注意力头", "note": "d_model 为输入宽度，必须能被头数整除。各头使用独立 Wq/Wk/Wv，d_head=d_model/heads；Wo 为单独的输出投影。", "concat": "各头拼接", "projected": "投影后输出", "projections": "独立投影", "headOutput": "该头输出", "err": {"divisible": "d_model 必须能被头数整除（头数不能超过 d_model）。"}},
+  home: {
+  "eyebrow": "看见数学，理解深度学习",
+  "intro": "通过小型真实计算探索深度学习。修改输入，观察结果，再沿着梯度理解训练。",
+  "start": "开始学习",
+  "browse": "浏览学习路线",
+  "fullPath": "从张量到注意力",
+  "orderNote": "先理解链式法则，再探索训练；之后学习 CNN、残差连接、归一化与注意力。",
+  "practice": "把概念用起来",
+  "practiceNote": "这些配套实验可以穿插在主线学习中。",
+  "level": {
+    "beginner": "入门",
+    "intermediate": "进阶",
+    "advanced": "深入"
+  },
+  "topic": {
+    "fundamentals": "基础知识",
+    "training": "训练",
+    "cnn": "CNN",
+    "modern": "现代深度学习"
+  },
+  "steps": {
+    "tensor": "重组数值，追踪维度变化。",
+    "activations": "连接非线性曲线与导数。",
+    "losses": "观察预测如何改变损失。",
+    "graph": "追踪数值与局部梯度。",
+    "backprop": "查看梯度如何流经各层。",
+    "init": "比较信号与梯度的尺度。",
+    "optimizers": "观察更新规则如何穿越地形。",
+    "regularization": "比较拟合效果与泛化表现。",
+    "cnn": "在图像上移动卷积核。",
+    "pooling": "将局部窗口缩减为一个值。",
+    "receptive": "从特征位置追溯输入像素。",
+    "residual": "比较分支与恒等路径的梯度。",
+    "normalization": "看清哪些维度共享统计量。",
+    "attention": "计算 Q/K/V 与加权输出。",
+    "multihead": "查看各头、拼接与输出投影。"
+  }
+},
 };

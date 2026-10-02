@@ -150,3 +150,32 @@ canvas.plot { width: 100%; background: var(--bg-raised); border-radius: 8px; dis
 /* Keep wide numerical tables scrollable inside their panels. */
 #main { min-width: 0; }
 #page-content .grid-2 > *, #page-content .grid-3 > *, #page-content .grid-4 > * { min-width: 0; }
+
+/* Learning path: ordinary links, readable order, no account or progress tracking. */
+a { color: var(--accent); }
+.nav-item { text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+.home-hero { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 30px; margin-bottom: 28px; border: 1px solid var(--border); border-radius: 16px; background: linear-gradient(130deg, var(--bg-panel), #182b48); }
+.home-eyebrow { color: #a9c8ff; font-size: 12px; letter-spacing: .06em; }
+.home-hero h2 { font-size: clamp(28px, 4vw, 40px); margin: 8px 0; }
+.home-intro { max-width: 530px; line-height: 1.7; color: #b8c1d0; }
+.home-actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 18px; }
+.home-actions a { text-decoration: none; }
+.home-primary { display: inline-block; background: var(--accent); color: white; padding: 10px 18px; border-radius: 8px; font-weight: 600; }
+.home-equation { font: 20px/2 var(--mono); white-space: nowrap; color: #b9d2ff; }
+.home-equation span { color: var(--accent-2); }
+.home-section-heading { margin-bottom: 16px; }
+.home-section-heading h2 { font-size: 20px; margin-bottom: 6px; }
+.home-section-heading p { color: var(--text-dim); line-height: 1.6; }
+.learning-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin-bottom: 24px; }
+.learning-node { display: flex; gap: 12px; height: 100%; padding: 16px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-panel); color: var(--text); text-decoration: none; }
+.learning-node:hover { border-color: var(--accent); background: var(--bg-raised); }
+.learning-number { font: 12px/1.6 var(--mono); color: var(--accent); }
+.learning-detail { display: grid; gap: 8px; flex: 1; min-width: 0; }
+.learning-detail strong { font-size: 14px; }
+.learning-description { font-size: 12px; color: #aeb8c8; line-height: 1.5; }
+.learning-tags { display: flex; flex-wrap: wrap; gap: 5px; font-size: 10px; color: #b0bed2; }
+.learning-tags span { background: var(--bg-raised); padding: 3px 6px; border-radius: 4px; }
+.learning-arrow { color: var(--text-dim); }
+@media (max-width: 1100px) { .learning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .home-equation { display: none; } }
+@media (max-width: 600px) { .learning-grid { grid-template-columns: 1fr; } .home-hero { padding: 22px; } }
